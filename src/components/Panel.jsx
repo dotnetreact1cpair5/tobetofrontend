@@ -17,6 +17,7 @@ function Panel() {
     console.log(data);
     // setCourses(data);
     setCourses(Object.values(data));
+
     // Object.entries
   };
   return (

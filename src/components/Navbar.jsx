@@ -66,9 +66,9 @@ function Navbar() {
               </button>
               {isOpen && (
                 <div className="absolute flex flex-col justify-between w-48 gap-2 py-4 font-light text-center text-zinc-100 rounded-xl bg-violet-500">
-                  <button >Profil Bilgileri</button>
+                  <button>Profil Bilgileri</button>
                   <hr className="w-full" />
-                  <button >Oturumu Kapat</button>
+                  <button>Oturumu Kapat</button>
                 </div>
               )}
             </div>

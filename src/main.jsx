@@ -13,6 +13,7 @@ import Assessments from "./pages/Assesments.jsx";
 import Catalogue from "./pages/Catalogue.jsx";
 import Calendar from "./pages/Calendar.jsx";
 import Layout from "./layouts/Layout.jsx";
+import CoursesPage from "./pages/CoursesPage.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path="/degerlendirmeler" element={<Assessments />} />
       <Route path="/katalog" element={<Catalogue />} />
       <Route path="/takvim" element={<Calendar />} />
+      <Route path="/egitimlerim" element={<CoursesPage />} />
     </Route>
   )
 );
