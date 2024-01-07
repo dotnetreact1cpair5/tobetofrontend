@@ -6,6 +6,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "node_modules/flowbite-react/lib/esm/**/*.js",
   ],
+  plugins: [require("flowbite/plugin")],
   theme: {
     extend: {
       fontFamily: {
@@ -13,5 +14,4 @@ export default {
       },
     },
   },
-  plugins: [],
 };

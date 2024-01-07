@@ -1,127 +1,77 @@
 import { useState } from "react";
-import { Card } from "flowbite-react";
-import { Link, NavLink } from "react-router-dom";
-import { Tabs } from "flowbite-react";
-import showMore from "/showmore.svg";
+
+import ApplicationTab from "./ApplicationTab";
+import CoursesTab from "./CoursesTab";
+import AnnouncementTab from "./AnnouncementTab";
+import SurveyTab from "./SurveyTab";
 function Panel() {
-  const [showCourses, setShowCourses] = useState(false);
-  const fetchCourses = () => {
-    setShowCourses(true);
+  const [tabState, setTabState] = useState(1);
+  const toggleTab = (index) => {
+    setTabState(index);
   };
+
   return (
     <section>
       <div className="container max-w-6xl mx-auto shadow-2xl rounded-xl">
-        <div className="logoplatform p-4 flex flex-col items-center">
+        <div className="flex flex-col items-center p-4 logoplatform">
           <img
             src="../public/iklogo.svg"
             alt=""
             className="w-[300px] h-[160px]"
           />
-          <div className="text-center space-y-5 mt-5">
+          <div className="mt-5 space-y-5 text-center">
             <h3 className="text-2xl">
               Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al.
             </h3>
             <h2 className="text-4xl font-bold">Aradığın “İş” Burada!</h2>
           </div>
         </div>
-        <div className="tabs">
+
+        <div className="w-1/2 mx-auto mt-8 tabs">
           <ul className="flex justify-around text-lg">
             <li>
-              <button className="focus:border-b-4 border-black ">
-                Basvurularim
+              <button
+                className={`${tabState === 1 && "border-black border-b-4"}`}
+                onClick={() => toggleTab(1)}
+              >
+                Başvurularım
               </button>
             </li>
+
             <li>
               <button
-                className="focus:border-b-4 border-black"
-                onClick={fetchCourses}
+                className={`${tabState === 2 && "border-black border-b-4"}`}
+                onClick={() => toggleTab(2)}
               >
                 Eğitimlerim
               </button>
             </li>
+
             <li>
-              <button className="focus:border-b-4 border-black ">
+              <button
+                className={`${tabState === 3 && "border-black border-b-4"}`}
+                onClick={() => toggleTab(3)}
+              >
                 Duyuru ve Haberlerim
               </button>
             </li>
+
             <li>
-              <button className="focus:border-b-4 border-black ">
+              <button
+                className={`${tabState === 4 && "border-black border-b-4"}`}
+                onClick={() => toggleTab(4)}
+              >
                 Anketlerim
               </button>
             </li>
           </ul>
         </div>
+
         {/* courses */}
-        {showCourses && (
-          <div className="flex flex-col items-center justify-center p-4">
-            <div className="card-container p-8 flex space-x-8">
-              <Card
-                className="dark:bg-teal-400 max-w-sm"
-                imgSrc="../public/iklogo.svg"
-              >
-                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Noteworthy technology acquisitions 2021
-                </h5>
-                <p className="font-normal text-gray-700 dark:text-gray-400">
-                  Here are the biggest enterprise technology acquisitions of
-                  2021 so far, in reverse chronological order.
-                </p>
-                <button className="bg-violet-600 rounded-full px-4 py-2">
-                  Başla
-                </button>
-              </Card>
-              <Card
-                className="dark:bg-teal-400 max-w-sm"
-                imgSrc="../public/iklogo.svg"
-              >
-                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Noteworthy technology acquisitions 2021
-                </h5>
-                <p className="font-normal text-gray-700 dark:text-gray-400">
-                  Here are the biggest enterprise technology acquisitions of
-                  2021 so far, in reverse chronological order.
-                </p>
-                <button className="bg-violet-600 rounded-full px-4 py-2">
-                  Başla
-                </button>
-              </Card>
-              <Card
-                className="dark:bg-teal-400 max-w-sm"
-                imgSrc="../public/iklogo.svg"
-              >
-                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Noteworthy technology acquisitions 2021
-                </h5>
-                <p className="font-normal text-gray-700 dark:text-gray-400">
-                  Here are the biggest enterprise technology acquisitions of
-                  2021 so far, in reverse chronological order.
-                </p>
-                <button className="bg-violet-600 rounded-full px-4 py-2">
-                  Başla
-                </button>
-              </Card>
-              <Card
-                className="dark:bg-teal-400 max-w-sm"
-                imgSrc="../public/iklogo.svg"
-              >
-                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Noteworthy technology acquisitions 2021
-                </h5>
-                <p className="font-normal text-gray-700 dark:text-gray-400">
-                  Here are the biggest enterprise technology acquisitions of
-                  2021 so far, in reverse chronological order.
-                </p>
-                <button className="bg-violet-600 rounded-full px-4 py-2">
-                  Başla
-                </button>
-              </Card>
-            </div>
-            <Link to="/degerlendirmeler" className="flex flex-col">
-              <img src={showMore} className="w-16 h-16 self-center" />
-              <span>Daha Fazla Göster</span>
-            </Link>
-          </div>
-        )}
+        {tabState === 2 && <CoursesTab />}
+
+        {/* surveys */}
+        {tabState === 4 && <SurveyTab />}
       </div>
     </section>
   );
