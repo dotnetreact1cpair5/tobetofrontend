@@ -9,7 +9,16 @@ function Panel() {
   const toggleTab = (index) => {
     setTabState(index);
   };
-
+  const [courses, setCourses] = useState(null);
+  const handleCourses = async () => {
+    toggleTab(2);
+    const response = await fetch("https://myfakeapi.com/api/cars/1");
+    const data = await response.json();
+    console.log(data);
+    // setCourses(data);
+    setCourses(Object.values(data));
+    // Object.entries
+  };
   return (
     <section>
       <div className="container max-w-6xl mx-auto shadow-2xl rounded-xl">
@@ -41,7 +50,7 @@ function Panel() {
             <li>
               <button
                 className={`${tabState === 2 && "border-black border-b-4"}`}
-                onClick={() => toggleTab(2)}
+                onClick={handleCourses}
               >
                 Eğitimlerim
               </button>
@@ -67,9 +76,12 @@ function Panel() {
           </ul>
         </div>
 
+        {/* applications */}
+        {tabState === 1 && <ApplicationTab />}
         {/* courses */}
-        {tabState === 2 && <CoursesTab />}
-
+        {tabState === 2 && <CoursesTab courses={courses} />}
+        {/* announcements */}
+        {tabState === 3 && <AnnouncementTab />}
         {/* surveys */}
         {tabState === 4 && <SurveyTab />}
       </div>
