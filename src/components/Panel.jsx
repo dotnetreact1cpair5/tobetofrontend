@@ -12,11 +12,13 @@ function Panel() {
   const [courses, setCourses] = useState(null);
   const handleCourses = async () => {
     toggleTab(2);
-    const response = await fetch("https://myfakeapi.com/api/cars/1");
+    const response = await fetch(
+      "http://localhost:49805/api/Course?PageIndex=0&PageSize=4"
+    );
     const data = await response.json();
     console.log(data);
     // setCourses(data);
-    setCourses(Object.values(data));
+    setCourses(Object.values(data.items));
 
     // Object.entries
   };

@@ -38,7 +38,7 @@ const CoursesTab = ({ courses }) => {
             //     Eğitime Git
             //   </button>
             // </div>
-            <CourseCard />
+            <CourseCard course={course} />
           ))
         ) : (
           <Loading />

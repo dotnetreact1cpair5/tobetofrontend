@@ -8,9 +8,11 @@ const CoursesPage = () => {
   }, []);
   const [courses, setCourses] = useState(null);
   const fetchAllCourses = async () => {
-    // const response = await fetch("http://localhost:49805/api/courses");
+    const response = await fetch(
+      "http://localhost:49805/api/Course?PageIndex=0&PageSize=10"
+    );
     const data = await response.json();
-    setCourses(Object.values(data));
+    setCourses(Object.values(data.items));
   };
   return (
     <main className="min-h-screen p-4">
@@ -18,7 +20,11 @@ const CoursesPage = () => {
         <h1 className="ml-48 font-bold text-white text-8xl">Eğitimlerim</h1>
       </div>
       <div className="grid grid-cols-4 p-8 place-items-center">
-        {courses ? courses.map(() => <CourseCard />) : <Loading />}
+        {courses ? (
+          courses.map((course) => <CourseCard course={course} />)
+        ) : (
+          <Loading />
+        )}
       </div>
     </main>
   );
