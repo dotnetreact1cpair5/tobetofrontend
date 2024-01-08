@@ -1,4 +1,10 @@
-const CourseCard = ({ course }) => {
+import { Course } from "./Panel";
+
+type Props = {
+  course: Course;
+};
+
+const CourseCard = ({ course }: Props) => {
   console.log(course);
   let date = new Date(course.createdDate).toLocaleDateString();
   return (

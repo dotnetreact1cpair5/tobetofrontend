@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
+import App from "./App.js";
 import "./index.css";
 import {
   createBrowserRouter,
@@ -8,7 +8,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Profile from "./pages/Profile.jsx";
+import Profile from "./pages/Profile.js";
 import Assessments from "./pages/Assesments.jsx";
 import Catalogue from "./pages/Catalogue.jsx";
 import Calendar from "./pages/Calendar.jsx";

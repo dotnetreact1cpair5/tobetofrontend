@@ -4,22 +4,23 @@ import ApplicationTab from "./ApplicationTab";
 import CoursesTab from "./CoursesTab";
 import AnnouncementTab from "./AnnouncementTab";
 import SurveyTab from "./SurveyTab";
+
+export type Course = { name: string; createdDate: string };
+
 function Panel() {
-  const [tabState, setTabState] = useState(1);
-  const toggleTab = (index) => {
-    setTabState(index);
-  };
-  const [courses, setCourses] = useState(null);
+  const [activeTabIndex, setActiveTabIndex] = useState(1);
+
+  const [courses, setCourses] = useState<Course[]>([]);
   const handleCourses = async () => {
-    toggleTab(2);
+    setActiveTabIndex(2);
     const response = await fetch(
       "http://localhost:49805/api/Course?PageIndex=0&PageSize=4"
     );
-    const data = await response.json();
-    console.log(data);
+    const data: Record<string, unknown> = await response.json();
+    const { items } = data;
     // setCourses(data);
-    setCourses(Object.values(data.items));
-
+    setCourses(items as Course[]);
+    // let typescript infer the types by itself as much as possible.
     // Object.entries
   };
   return (
@@ -43,8 +44,10 @@ function Panel() {
           <ul className="flex justify-around text-lg">
             <li>
               <button
-                className={`${tabState === 1 && "border-black border-b-4"}`}
-                onClick={() => toggleTab(1)}
+                className={`${
+                  activeTabIndex === 1 && "border-black border-b-4"
+                }`}
+                onClick={() => setActiveTabIndex(1)}
               >
                 Başvurularım
               </button>
@@ -52,7 +55,9 @@ function Panel() {
 
             <li>
               <button
-                className={`${tabState === 2 && "border-black border-b-4"}`}
+                className={`${
+                  activeTabIndex === 2 && "border-black border-b-4"
+                }`}
                 onClick={handleCourses}
               >
                 Eğitimlerim
@@ -61,8 +66,10 @@ function Panel() {
 
             <li>
               <button
-                className={`${tabState === 3 && "border-black border-b-4"}`}
-                onClick={() => toggleTab(3)}
+                className={`${
+                  activeTabIndex === 3 && "border-black border-b-4"
+                }`}
+                onClick={() => setActiveTabIndex(3)}
               >
                 Duyuru ve Haberlerim
               </button>
@@ -70,8 +77,10 @@ function Panel() {
 
             <li>
               <button
-                className={`${tabState === 4 && "border-black border-b-4"}`}
-                onClick={() => toggleTab(4)}
+                className={`${
+                  activeTabIndex === 4 && "border-black border-b-4"
+                }`}
+                onClick={() => setActiveTabIndex(4)}
               >
                 Anketlerim
               </button>
@@ -80,13 +89,13 @@ function Panel() {
         </div>
 
         {/* applications */}
-        {tabState === 1 && <ApplicationTab />}
+        {activeTabIndex === 1 && <ApplicationTab />}
         {/* courses */}
-        {tabState === 2 && <CoursesTab courses={courses} />}
+        {activeTabIndex === 2 && <CoursesTab courses={courses} />}
         {/* announcements */}
-        {tabState === 3 && <AnnouncementTab />}
+        {activeTabIndex === 3 && <AnnouncementTab />}
         {/* surveys */}
-        {tabState === 4 && <SurveyTab />}
+        {activeTabIndex === 4 && <SurveyTab />}
       </div>
     </section>
   );

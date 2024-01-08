@@ -3,12 +3,19 @@ import { Link } from "react-router-dom";
 import showMore from "/showmore.svg";
 import Loading from "./Loading";
 import CourseCard from "./CourseCard";
-const CoursesTab = ({ courses }) => {
+import type { Course } from "./Panel";
+
+type Props = {
+  courses: Course[];
+};
+
+const CoursesTab = ({ courses }: Props) => {
   //  TODO: Loading state & a message saying 'there are no courses'. Think of all cases and make components accordingly.
   return (
     <div className="flex flex-col items-center justify-center p-4">
       <div className="flex p-8 space-x-8 card-container">
-        {courses ? (
+        {!courses.length && <Loading />}
+        {!!courses.length &&
           courses.map((course) => (
             // <Card key={course.id}
             //   className="max-w-sm dark:bg-teal-400"
@@ -39,10 +46,7 @@ const CoursesTab = ({ courses }) => {
             //   </button>
             // </div>
             <CourseCard course={course} />
-          ))
-        ) : (
-          <Loading />
-        )}
+          ))}
       </div>
       <Link to="/egitimlerim" className="flex flex-col">
         <img src={showMore} className="self-center w-16 h-16" />
