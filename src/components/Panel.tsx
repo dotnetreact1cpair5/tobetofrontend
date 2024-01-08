@@ -25,12 +25,12 @@ function Panel() {
   };
   return (
     <section>
-      <div className="container max-w-6xl mx-auto shadow-2xl rounded-xl">
-        <div className="flex flex-col items-center p-4 logoplatform">
+      <div className="container mx-auto max-w-6xl rounded-xl shadow-2xl">
+        <div className="logoplatform flex flex-col items-center p-4">
           <img
             src="../public/iklogo.svg"
             alt=""
-            className="w-[300px] h-[160px]"
+            className="h-[160px] w-[300px]"
           />
           <div className="mt-5 space-y-5 text-center">
             <h3 className="text-2xl">
@@ -40,7 +40,7 @@ function Panel() {
           </div>
         </div>
 
-        <div className="w-1/2 mx-auto mt-8 tabs">
+        <div className="tabs mx-auto mt-8 w-1/2">
           <ul className="flex justify-around text-lg">
             <li>
               <button
