@@ -1,11 +1,11 @@
 function Footer() {
   return (
-    <footer className="bg-[#9933ff] text-white py-5 h-[107.5px]">
-      <div className="container mx-auto w-[1140px] h-[67.5px] flex justify-between items-center">
+    <footer className="h-[107.5px] bg-[#9933ff] py-5 text-white">
+      <div className="container mx-auto flex h-[67.5px] w-[1140px] items-center justify-between">
         <div className="logo">
           <a href="#">
             <img
-              src="./public/tobetologowhite.png"
+              src="../assets/tobetologowhite.png"
               alt=""
               className="w-30 h-5"
             />
@@ -15,7 +15,7 @@ function Footer() {
           <ul className="">
             <li>
               <a
-                className="bg-white rounded-full py-2 px-5 text-black text-sm font-bold"
+                className="rounded-full bg-white px-5 py-2 text-sm font-bold text-black"
                 href="#"
               >
                 Bize Ulaşın

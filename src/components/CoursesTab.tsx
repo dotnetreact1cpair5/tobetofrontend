@@ -1,6 +1,6 @@
 import { Card } from "flowbite-react";
 import { Link } from "react-router-dom";
-import showMore from "/showmore.svg";
+import showMore from "../assets/showmore.svg";
 import Loading from "./Loading";
 import CourseCard from "./CourseCard";
 import type { Course } from "./Panel";

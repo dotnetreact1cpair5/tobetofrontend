@@ -13,13 +13,13 @@ div.card > h1 {
 }
 
 li > a {
-  @apply focus:text-violet-700 focus:font-semibold;
-}
- 
-.card{
-  @apply flex flex-col gap-12 justify-center h-72 font-semibold rounded-b-3xl rounded-tr-3xl
+  @apply focus:font-semibold focus:text-violet-700;
 }
 
-.card > h1{
-  @apply pt-12 text-4xl
+.card {
+  @apply flex flex-col gap-12 justify-center h-72 font-semibold rounded-b-3xl rounded-tr-3xl;
+}
+
+.card > h1 {
+  @apply pt-12 text-4xl;
 }

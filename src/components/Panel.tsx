@@ -5,10 +5,10 @@ import CoursesTab from "./CoursesTab";
 import AnnouncementTab from "./AnnouncementTab";
 import SurveyTab from "./SurveyTab";
 
-export type Course = { name: string; createdDate: string };
-
+export type Course = { name: string; createdDate: string; id: number };
 function Panel() {
   const [activeTabIndex, setActiveTabIndex] = useState(1);
+  const URL = "tobetoplatform.nl";
 
   const [courses, setCourses] = useState<Course[]>([]);
   const handleCourses = async () => {
@@ -28,7 +28,7 @@ function Panel() {
       <div className="container mx-auto max-w-6xl rounded-xl shadow-2xl">
         <div className="logoplatform flex flex-col items-center p-4">
           <img
-            src="../public/iklogo.svg"
+            src="../assets/iklogo.svg"
             alt=""
             className="h-[160px] w-[300px]"
           />

@@ -8,12 +8,14 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Profile from "./pages/Profile.js";
-import Assessments from "./pages/Assesments.jsx";
-import Catalogue from "./pages/Catalogue.jsx";
-import Calendar from "./pages/Calendar.jsx";
+import Profile from "./pages/ProfilePage.js";
+import Assessments from "./pages/AssesmentsPage.js";
+import Catalogue from "./pages/CataloguePage.js";
+import Calendar from "./pages/CalendarPage.js";
 import Layout from "./layouts/Layout.jsx";
 import CoursesPage from "./pages/CoursesPage.jsx";
+import { Provider } from "react-redux";
+import { store } from "./store.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,7 +54,9 @@ const router = createBrowserRouter(
 // ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Provider store={store}>
+    <React.StrictMode>
+      <RouterProvider router={router} />
+    </React.StrictMode>
+  </Provider>
 );

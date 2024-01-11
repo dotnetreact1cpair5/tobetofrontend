@@ -10,8 +10,7 @@ const CourseCard = ({ course }: Props) => {
   return (
     <div className="coursecard flex h-[320px] w-64 flex-col space-y-3 rounded-xl border-4 border-transparent bg-[#f1f1f1] p-1 shadow-xl transition duration-500 hover:border-violet-500">
       <img
-        src="/public/classimage.png"
-        alt=""
+        src="../assets/classimage.png"
         className="h-40 w-60 self-center rounded-t-xl object-cover"
       />
       <h2 className="font-semibold">{course.name}</h2>
