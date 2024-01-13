@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    user: { name: "Muhammed Ali", age: 22 },
+    user: { name: "Random Guy", age: 22 },
   },
   reducers: {
-    changeName: (state, action) => {
-      state.user.name = "Efe";
+    changeName: (state) => {
+      state.user.name = "Random Girl";
     },
     changeAge: (state) => {
       state.user.age = 24;

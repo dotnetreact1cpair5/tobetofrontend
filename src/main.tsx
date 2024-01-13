@@ -16,11 +16,12 @@ import Layout from "./layouts/Layout.jsx";
 import CoursesPage from "./pages/CoursesPage.jsx";
 import { Provider } from "react-redux";
 import { store } from "./store.js";
+import HomePage from "./pages/HomePage.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route index element={<App />} />
+      <Route index element={<HomePage />} />
       <Route path="/profilim" element={<Profile />} />
       <Route path="/degerlendirmeler" element={<Assessments />} />
       <Route path="/katalog" element={<Catalogue />} />
