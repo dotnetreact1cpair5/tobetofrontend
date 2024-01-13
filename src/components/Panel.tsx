@@ -8,7 +8,6 @@ import SurveyTab from "./SurveyTab";
 export type Course = { name: string; createdDate: string; id: number };
 function Panel() {
   const [activeTabIndex, setActiveTabIndex] = useState(1);
-  const URL = "tobetoplatform.nl";
 
   const [courses, setCourses] = useState<Course[]>([]);
   const handleCourses = async () => {
