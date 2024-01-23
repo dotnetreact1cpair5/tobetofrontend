@@ -1,7 +1,16 @@
 import { useEffect, useState } from "react";
-import CourseList from "../components/CourseList";
+import CourseList from "../components/courses/CourseList";
+import useCourseList from "../hooks/useCourseList";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 const CoursesPage = () => {
+  // const { data, loading, error } = useCourseList();
+  // console.log({ data, loading, error });
+
+  const selectAllCourses = useSelector((state: RootState) => state.courses);
+  console.log(selectAllCourses);
+
   useEffect(() => {
     fetchAllCourses();
   }, []);

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import AssessmentCard from "../components/AssessmentCard";
-import AssessmentList from "../components/AssessmentList";
-import GenericButton from "../components/GenericButton";
-import Modal from "../components/Modal";
+import AssessmentCard from "../components/assessments/AssessmentCard";
+import AssessmentList from "../components/assessments/AssessmentList";
+import GenericButton from "../components/helpers/GenericButton";
+import Modal from "../components/helpers/Modal";
 
 function AssessmentsPage() {
   const [assessments, setAssessments] = useState([]);
@@ -43,7 +43,7 @@ function AssessmentsPage() {
           </div>
           {/* left-right card area */}
           <div className="doublecard grid grid-cols-2">
-            <AssessmentCard  />
+            <AssessmentCard />
             <AssessmentList
               assessments={assessments}
               toggleModal={modalHandler}

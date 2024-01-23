@@ -6,7 +6,7 @@ import LoginPage from "../pages/LoginPage";
 function Layout() {
   return (
     <>
-      {/* <LoginPage /> */}
+      <LoginPage />
       <Navbar />
       <Outlet />
       <Footer />

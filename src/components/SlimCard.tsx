@@ -1,4 +1,4 @@
-import GenericButton from "./GenericButton";
+import GenericButton from "./helpers/GenericButton";
 
 const SlimCard = ({ children, toggleModal }: any) => {
   return (
@@ -12,7 +12,7 @@ const SlimCard = ({ children, toggleModal }: any) => {
       </span>
       {children}
       abc
-      <GenericButton>Basla</GenericButton>
+      <GenericButton>Başla</GenericButton>
     </div>
   );
 };

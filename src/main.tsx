@@ -8,21 +8,22 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Profile from "./pages/ProfilePage.js";
+// import ProfilePage from "./pages/ProfilePage.js";
 import Assessments from "./pages/AssesmentsPage.js";
 import Catalogue from "./pages/CataloguePage.js";
 import Calendar from "./pages/CalendarPage.js";
 import Layout from "./layouts/Layout.jsx";
-import CoursesPage from "./pages/CoursesPage.jsx";
+import CoursesPage from "./pages/CoursesPage.js";
+import HomePage from "./pages/HomePage.js";
 import { Provider } from "react-redux";
 import { store } from "./store.js";
-import HomePage from "./pages/HomePage.js";
+import PPage from "./pages/PPage.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<HomePage />} />
-      <Route path="/profilim" element={<Profile />} />
+      <Route path="/profilim" element={<PPage />} />
       <Route path="/degerlendirmeler" element={<Assessments />} />
       <Route path="/katalog" element={<Catalogue />} />
       <Route path="/takvim" element={<Calendar />} />
@@ -56,8 +57,6 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <Provider store={store}>
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
+    <RouterProvider router={router} />
   </Provider>
 );

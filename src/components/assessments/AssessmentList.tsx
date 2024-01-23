@@ -1,5 +1,5 @@
-import GenericButton from "./GenericButton";
-import SlimCard from "./SlimCard";
+import GenericButton from "../helpers/GenericButton";
+import SlimCard from "../SlimCard";
 
 // type ListProps = {
 //   assessments: [];

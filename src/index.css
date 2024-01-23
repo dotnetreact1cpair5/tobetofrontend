@@ -4,6 +4,45 @@
 @tailwind components;
 @tailwind utilities;
 
+.rainbow-card {
+  /* z-index: 1; */
+  border-radius: 1em;
+  animation: rainbow 4s linear infinite;
+  background: linear-gradient(
+    70deg,
+    #0ebefb,
+    #ffdd40,
+    #ae63e4,
+    #47cf73,
+    #0ebefb,
+    #ffdd40,
+    #ae63e4,
+    #47cf73
+  );
+}
+@keyframes rainbow {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+/* .rainbow-card:after {
+  content: "";
+  bottom: 100px;
+  top: 2px;
+  left: 1px;
+  right: 1px;
+  height: auto;
+  width: auto;
+  margin: 3px;
+  background: inherit;
+} */
+
 html {
   @apply font-body;
 }
@@ -17,10 +56,9 @@ li > a {
 }
 
 .card {
-  @apply flex flex-col gap-12 justify-center h-72 font-semibold rounded-b-3xl rounded-tr-3xl;
+  @apply flex h-72 flex-col justify-center gap-12 rounded-b-3xl rounded-tr-3xl font-semibold;
 }
 
 .card > h1 {
   @apply pt-12 text-4xl;
 }
-

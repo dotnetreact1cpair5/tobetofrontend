@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import ApplicationTab from "./ApplicationTab";
-import CoursesTab from "./CoursesTab";
+import CoursesTab from "./courses/CoursesTab";
 import AnnouncementTab from "./AnnouncementTab";
 import SurveyTab from "./SurveyTab";
 
@@ -15,12 +15,9 @@ function Panel() {
     const response = await fetch(
       "http://localhost:49805/api/Course?PageIndex=0&PageSize=4"
     );
-    const data: Record<string, unknown> = await response.json();
-    const { items } = data;
-    // setCourses(data);
-    setCourses(items as Course[]);
+    const { items } = await response.json();
+    setCourses(items);
     // let typescript infer the types by itself as much as possible.
-    // Object.entries
   };
   return (
     <section>
