@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 .rainbow-card {
-  /* z-index: 1; */
+  /* z-index: -1; */
   border-radius: 1em;
   animation: rainbow 4s linear infinite;
   background: linear-gradient(
@@ -19,10 +19,12 @@
     #ae63e4,
     #47cf73
   );
+  background-size: 200px;
 }
+
 @keyframes rainbow {
   0% {
-    background-position: 0 50%;
+    background-position: 20% 50%;
   }
   50% {
     background-position: 100% 50%;
@@ -31,6 +33,7 @@
     background-position: 200% 50%;
   }
 }
+
 /* .rainbow-card:after {
   content: "";
   bottom: 100px;

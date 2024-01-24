@@ -1,4 +1,5 @@
 import GenericButton from "../components/helpers/GenericButton";
+import StyledButton from "../components/helpers/StyledButton";
 
 const LoginPage = () => {
   return (
@@ -11,7 +12,9 @@ const LoginPage = () => {
               Aradığın <span className="text-[#00b078]">"</span>İş
               <span className="text-[#00b078]">"</span> Burada!
             </h3>
-            <GenericButton color="amber">Başvur</GenericButton>
+            <StyledButton color="green" size="medium">
+              Başvur
+            </StyledButton>
           </div>
         </div>
       </header>
@@ -26,14 +29,18 @@ const LoginPage = () => {
             <li>Tobeto'da Bu Ay</li>
           </ul>
           <div className="flex justify-between space-x-7">
-            <button>Giriş Yap</button>
-            <button>Ücretsiz Üye Ol</button>
+            <StyledButton color="black" border>
+              Giriş Yap
+            </StyledButton>
+            <StyledButton color="black" rainbow border>
+              Ücretsiz Üye Ol
+            </StyledButton>
           </div>
         </div>
       </nav>
       <main className="grid min-h-[640px]">
-        <div className="container mx-auto grid grid-cols-2 place-items-center">
-          <div className="rainbow-card flex h-[425px] w-3/4 p-2">
+        <div className="container mx-auto grid w-3/4 grid-cols-2 place-items-center space-x-12">
+          <div className="rainbow-card flex h-[425px] w-3/4 justify-self-end p-2">
             <div className="flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
               <img
                 src="/public/assets/tobetocolored.png"
@@ -41,19 +48,22 @@ const LoginPage = () => {
               />
               <form
                 action=""
+                onSubmit={(e) => e.preventDefault()}
                 className="flex w-full flex-col items-center justify-center space-y-6"
               >
                 <input
                   type="text"
                   placeholder="E-mail adresiniz"
-                  className="w-full rounded-xl"
+                  className="h-12 w-full rounded-xl bg-slate-200 p-4"
                 />
                 <input
                   type="text"
                   placeholder="Şifreniz"
-                  className="w-full rounded-xl"
+                  className="h-12 w-full rounded-xl bg-slate-200 p-4"
                 />
-                <button>Giriş Yap</button>
+
+                <StyledButton size="large">Giriş Yap</StyledButton>
+
                 <button>Şifremi Unuttum</button>
               </form>
               <p>
@@ -62,16 +72,16 @@ const LoginPage = () => {
               </p>
             </div>
           </div>
-          <div className="rainbow-card flex h-[425px] w-3/4 p-2">
-            {/* <div className="flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
+          <div className="rainbow-card flex h-[425px] w-3/4 justify-self-start p-2">
+            <div className="flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
               <img src="/public/assets/iklogo.svg" className="h-auto w-60" />
               <span className="w-1/3 border-b-2 border-b-[#00b078]"></span>
               <p className="text-2xl font-bold">
                 Aradığın <span className="text-[#00b078]">"</span>İş
                 <span className="text-[#00b078]">"</span> Burada!
               </p>
-              <GenericButton>Başvur</GenericButton>
-            </div> */}
+              <StyledButton size="medium">Başvur</StyledButton>
+            </div>
           </div>
         </div>
       </main>
