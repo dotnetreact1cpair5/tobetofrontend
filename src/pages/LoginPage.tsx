@@ -1,7 +1,20 @@
+import { useDispatch, useSelector } from "react-redux";
 import GenericButton from "../components/helpers/GenericButton";
 import StyledButton from "../components/helpers/StyledButton";
+import { RootState } from "../store";
+import { login } from "../slices/authSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import PrivateRoutes from "../utils/PrivateRoutes";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const isAuthenticated = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
+  if (isAuthenticated) navigate("/");
+  const user = useSelector((state: RootState) => state.auth.user);
   return (
     <div className="min-h-screen">
       <header>
@@ -22,7 +35,10 @@ const LoginPage = () => {
         <div className="flex w-full items-center justify-between p-4 text-white">
           <img src="/public/assets/tobetologobeyaz.png" className="w-40" />
           <ul className="flex justify-around space-x-8 p-2">
-            <li>Biz Kimiz?</li>
+            <li>
+              Biz Kimiz?
+              {isAuthenticated}
+            </li>
             <li>Neler Sunuyoruz?</li>
             <li>Katalog</li>
             <li>Codecademy</li>
@@ -62,7 +78,9 @@ const LoginPage = () => {
                   className="h-12 w-full rounded-xl bg-slate-200 p-4"
                 />
 
-                <StyledButton size="large">Giriş Yap</StyledButton>
+                <StyledButton size="large" onClick={() => dispatch(login())}>
+                  Giriş Yap
+                </StyledButton>
 
                 <button>Şifremi Unuttum</button>
               </form>

@@ -4,12 +4,14 @@ import userSlice from "./slices/userSlice";
 import accountSlice from "./slices/accountSlice";
 import postsReducer from "./slices/postsSlice";
 import coursesReducer from "./slices/coursesSlice";
+import authReducer from "./slices/authSlice";
 export const store = configureStore({
   reducer: {
     // user: userSlice,
     // account: accountSlice,
     posts: postsReducer,
     courses: coursesReducer,
+    auth: authReducer,
   },
 });
 // Infer the `RootState` and `AppDispatch` types from the store itself

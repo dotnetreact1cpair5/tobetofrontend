@@ -2,7 +2,10 @@ import { NavLink } from "react-router-dom";
 import tbtLogo from "../assets/tbtlogo.svg";
 import { useState } from "react";
 import { Dropdown } from "flowbite-react";
+import { useDispatch } from "react-redux";
+import { logout } from "../slices/authSlice";
 function Navbar() {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <header className="font-normal">
@@ -68,7 +71,9 @@ function Navbar() {
                 <div className="absolute flex w-48 flex-col items-center justify-center space-y-3 rounded-md bg-[#93f] py-4 text-center text-sm font-normal text-zinc-100">
                   <button>Profil Bilgileri</button>
                   <hr className="w-full" />
-                  <button>Oturumu Kapat</button>
+                  <button onClick={() => dispatch(logout())}>
+                    Oturumu Kapat
+                  </button>
                 </div>
               )}
             </div>
