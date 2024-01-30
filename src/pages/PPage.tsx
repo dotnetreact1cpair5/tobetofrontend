@@ -1,11 +1,23 @@
+// PPage.tsx
+import React from "react";
 import Pcard from "../components/profile/Pcard";
 import Pdatacard from "../components/profile/Pdatacard";
+import useProfileData from "../hooks/useProfileData";
 
 const PPage = () => {
+  const { profileData, loading, error } = useProfileData();
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <main className="container mx-auto grid max-w-6xl grid-cols-3 space-x-8 p-4">
       <div className="col-span-1 w-full space-y-8">
-        <Pdatacard />
+        <Pdatacard data={profileData} />
         <Pcard title="Hakkımda" />
         <Pcard title="Yetkinliklerim" content="javascript" />
         <Pcard title="Yabancı Dillerim" content="ingilizce" />
@@ -29,4 +41,5 @@ const PPage = () => {
     </main>
   );
 };
+
 export default PPage;
