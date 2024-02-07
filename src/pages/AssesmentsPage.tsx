@@ -6,11 +6,7 @@ import Modal from "../components/helpers/Modal";
 
 function AssessmentsPage() {
   const [assessments, setAssessments] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const modalHandler = () => {
-    console.log("clicked");
-    setShowModal(true);
-  };
+
   useEffect(() => {
     const fetchAssessments = async () => {
       const response = await fetch("https://fakestoreapi.com/users?limit=5");
@@ -24,7 +20,6 @@ function AssessmentsPage() {
   }, []);
   return (
     <>
-      {showModal && <Modal setShowModal={setShowModal} />}
       <main className="container mx-auto my-10 max-w-6xl space-y-10">
         <h2 className="text-center text-4xl font-normal">
           <span className="text-[#9933ff]">Yetkinlik</span>lerini ücretsiz ölç,{" "}
@@ -44,10 +39,7 @@ function AssessmentsPage() {
           {/* left-right card area */}
           <div className="doublecard grid grid-cols-2">
             <AssessmentCard />
-            <AssessmentList
-              assessments={assessments}
-              toggleModal={modalHandler}
-            />
+            <AssessmentList assessments={assessments} />
           </div>
 
           <section className="subscription-perks text-center">

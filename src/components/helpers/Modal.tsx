@@ -1,12 +1,13 @@
 type ModalProps = {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
+  assessment: any;
 };
 
-const Modal = ({ setShowModal }: ModalProps) => {
+const Modal = ({ assessment, setShowModal }: ModalProps) => {
   return (
     <div className="fixed left-0 top-0 flex h-full w-full bg-black bg-opacity-60">
-      <div className="relative mx-auto flex h-96 max-w-6xl flex-col items-center justify-center gap-20 place-self-center bg-white p-4 text-center hover:opacity-100">
-        <h2 className="text-4xl font-bold">Front End</h2>
+      <div className="relative mx-auto flex h-96 max-w-6xl flex-col items-center justify-center gap-20 place-self-center bg-white p-4 text-center text-black hover:opacity-100">
+        <h2 className="text-4xl font-bold">{assessment.username}</h2>
         <button
           className="absolute right-4 top-4 cursor-pointer"
           onClick={() => setShowModal(false)}
