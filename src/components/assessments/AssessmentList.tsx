@@ -1,5 +1,6 @@
 import GenericButton from "../helpers/GenericButton";
-import SlimCard from "../SlimCard";
+import SlimCard from "../AssessmentCard";
+import AssessmentCard from "../AssessmentCard";
 
 // type ListProps = {
 //   assessments: [];
@@ -11,7 +12,9 @@ const AssessmentList = ({ assessments, toggleModal }: any) => {
     <div className="flex flex-col items-center justify-center space-y-5 p-4 text-white">
       {assessments.map((assessment: any) => {
         return (
-          <SlimCard toggleModal={toggleModal}>{assessment.username}</SlimCard>
+          <AssessmentCard toggleModal={toggleModal} assessment={assessment}>
+            {assessment.username}
+          </AssessmentCard>
         );
       })}
     </div>
