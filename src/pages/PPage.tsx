@@ -22,7 +22,7 @@ const PPage = () => {
         <Pcard title="Yetkinliklerim" content="javascript" />
         <Pcard title="Yabancı Dillerim" content="ingilizce" />
         <Pcard title="Sertifikalarim" content="Amazon AWS" />
-        <Pcard title="Medya Hesaplarım" content="linkedin" />
+        <Pcard title="Medya Hesaplarım" content="Linkedin" />
       </div>
       <div className="col-span-2 w-full space-y-8">
         <Pcard title="Tobeto İşte Başarı Modelim" chart={true} />
