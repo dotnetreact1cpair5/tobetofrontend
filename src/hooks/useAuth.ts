@@ -7,4 +7,4 @@ const useAuth = () => {
   const signUp = () => {};
   const fetchUser = () => {};
 };
-export default useAuth;
+export default useAuth; //
