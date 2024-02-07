@@ -1,7 +1,7 @@
-export const fetchExperiences = async () => {
+export async function fetchEducationStatusData() {
     try {
-      const response = await fetch("http://localhost:5045/api/Experiences?PageIndex=0&PageSize=5");
-  
+      const response = await fetch('http://localhost:5045/api/EducationStatus?PageIndex=0&PageSize=10');
+     
       if (!response.ok) {
         throw new Error('Veri çekme hatası!');
       }
@@ -16,6 +16,6 @@ export const fetchExperiences = async () => {
       return responseData.items;
     } catch (error) {
       console.error('Veri alınırken hata oluştu!:', error);
-      throw error;
+      return [];
     }
-  };
+  }

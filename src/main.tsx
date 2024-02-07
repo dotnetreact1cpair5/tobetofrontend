@@ -18,6 +18,7 @@ import HomePage from "./pages/HomePage.js";
 import { Provider } from "react-redux";
 import { store } from "./store.js";
 import PPage from "./pages/PPage.js";
+import ProfileEdit from "./components/profileEdit/ProfileEdit.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="/katalog" element={<Catalogue />} />
       <Route path="/takvim" element={<Calendar />} />
       <Route path="/egitimlerim" element={<CoursesPage />} />
+      <Route path="/profilim/profilimi-duzenle/*" element={<ProfileEdit />} />
     </Route>
   )
 );

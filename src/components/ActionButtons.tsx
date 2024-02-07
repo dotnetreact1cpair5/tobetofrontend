@@ -1,16 +1,26 @@
+import { useNavigate } from 'react-router-dom';
+
 function ActionButtons() {
+  const navigate = useNavigate();
+    const handleNavigateToProfileEditPage = () => {
+        navigate('/profilim/profilimi-duzenle/kisisel-bilgilerim');
+    }
+
+    const handleNavigateToTestPage = () => {
+      navigate('/degerlendirmeler');
+  }
   return (
     <section>
       <div className="container max-w-6xl mx-auto grid grid-cols-3 text-center place-items-center my-10 gap-2">
         <div className=" card bg-gradient-to-bl from-[#1d0b8c] to-[#bda6fe] p-5 w-60 text-white flex flex-col gap-4">
           <h1>Profilini oluştur</h1>
-          <button className="bg-violet-600 rounded-full px-4 py-2">
+          <button className="bg-violet-600 rounded-full px-4 py-2" onClick={handleNavigateToProfileEditPage}>
             Başla
           </button>
         </div>
         <div className=" card bg-gradient-to-bl from-[#0e0b93] to-[#5eb6ca] p-12 w-60 text-white flex flex-col">
           <h1>Kendini değerlendir</h1>
-          <button className="bg-violet-600 rounded-full px-4 py-2">
+          <button className="bg-violet-600 rounded-full px-4 py-2" onClick={handleNavigateToTestPage}>
             Başla
           </button>
         </div>

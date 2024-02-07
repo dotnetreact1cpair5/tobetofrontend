@@ -8,23 +8,23 @@ function AssessmentsPage() {
   const [assessments, setAssessments] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const modalHandler = () => {
-    console.log("clicked");
+    //console.log("clicked");
     setShowModal(true);
   };
   useEffect(() => {
     const fetchAssessments = async () => {
-      const response = await fetch("https://fakestoreapi.com/users?limit=5");
-
-      const data = await response.json();
-      // console.log(data);
-      // console.log(data[0].username);
-      setAssessments(data);
+      const accountQuestionSetsResponse = await fetch("http://localhost:5045/api/AccountQuestionSets?PageIndex=0&PageSize=5");
+      const accountQuestionSetsData = await accountQuestionSetsResponse.json();
+      const result = accountQuestionSetsData.items;
+      console.log(result);
+      setAssessments(result);
     };
     fetchAssessments();
   }, []);
+
   return (
     <>
-      {showModal && <Modal setShowModal={setShowModal} />}
+      {showModal && <Modal setShowModal={setShowModal} result={assessments} />}
       <main className="container mx-auto my-10 max-w-6xl space-y-10">
         <h2 className="text-center text-4xl font-normal">
           <span className="text-[#9933ff]">Yetkinlik</span>lerini ücretsiz ölç,{" "}
@@ -44,10 +44,7 @@ function AssessmentsPage() {
           {/* left-right card area */}
           <div className="doublecard grid grid-cols-2">
             <AssessmentCard />
-            <AssessmentList
-              assessments={assessments}
-              toggleModal={modalHandler}
-            />
+           <AssessmentList assessments={assessments} toggleModal={modalHandler} />
           </div>
 
           <section className="subscription-perks text-center">

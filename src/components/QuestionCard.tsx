@@ -1,18 +1,29 @@
-import GenericButton from "./GenericButton";
+import { useEffect, useState } from "react";
+import GenericButton from "./helpers/GenericButton";
 
 type ModalProps = {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-  result : any
 };
 
-const Modal = ({ setShowModal, result }: ModalProps) => {
+const Modal = ({ questionSetId, setShowModal }: ModalProps) => {
+
+    useEffect(() => {
+        const fetchAssessments = async () => {
+          const accountQuestionSetsResponse = await fetch("http://localhost:5045/api/AccountQuestionSets?PageIndex=0&PageSize=5");
+          const accountQuestionSetsData = await accountQuestionSetsResponse.json();
+          const result = accountQuestionSetsData.items;
+          setAssessments(result);
+        };
+        fetchAssessments();
+      }, []);
+
   return (
     <div className="fixed left-0 top-0 flex h-full w-full bg-black bg-opacity-60">
       <div className="relative mx-auto flex h-96 max-w-6xl flex-col items-center justify-center gap-20 place-self-center bg-white p-4 text-center hover:opacity-100">
       
       
-        
-        <h2 className="text-4xl font-bold text-green-400">{result[0].id}bişey</h2>
+        <h2 className="text-4xl font-bold">FrontEnd</h2>
+        {/* <h2 className="text-4xl font-bold">{children.questionSetName}</h2> */}
 
         <button
           className="absolute right-4 top-4 cursor-pointer"
@@ -36,7 +47,7 @@ const Modal = ({ setShowModal, result }: ModalProps) => {
         <p className="text-xl">
         Bu sınav 25 sorudan oluşmakta olup sınav süresi 30 dakikadır. Sınav çoktan seçmeli test şeklinde olup 
         sınavı yarıda bıraktığınız taktırde çözdüğünüz kısım kadarıyla değerlendirileceksiniz.
-        {/* {result.questionSetDescription} */}
+        {children.questionSetDescription}
         </p>
         <div className="flex flex-col text-lg font-semibold">
         <span>Sınav Süresi : 30 Dakika</span>
@@ -48,7 +59,7 @@ const Modal = ({ setShowModal, result }: ModalProps) => {
           <span>Soru Tipi : {children.questionSetType}</span> */}
         </div>
         <div>
-        {/* <GenericButton>{result.status == false ? "Sınava Başla" : "Raporu Görüntüle"}</GenericButton> */}
+        <GenericButton>{children.status == false ? "Sınava Başla" : "Raporu Görüntüle"}</GenericButton>
         </div>
       </div>
     </div>

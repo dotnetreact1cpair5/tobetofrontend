@@ -11,7 +11,7 @@ const AssessmentList = ({ assessments, toggleModal }: any) => {
     <div className="flex flex-col items-center justify-center space-y-5 p-4 text-white">
       {assessments.map((assessment: any) => {
         return (
-          <SlimCard toggleModal={toggleModal}>{assessment.username}</SlimCard>
+          <SlimCard toggleModal={toggleModal}>{assessment}</SlimCard>
         );
       })}
     </div>
