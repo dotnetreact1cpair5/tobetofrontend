@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import GenericButton from "../components/helpers/GenericButton";
 import StyledButton from "../components/helpers/StyledButton";
 import { RootState } from "../store";
-import { login } from "../slices/authSlice";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import PrivateRoutes from "../utils/PrivateRoutes";
+import useAuth from "../hooks/useAuth";
+import LoginHeader from "../components/LoginHeader";
+import { loginAsync } from "../slices/authSlice";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -15,22 +14,12 @@ const LoginPage = () => {
   );
   if (isAuthenticated) navigate("/");
   const user = useSelector((state: RootState) => state.auth.user);
+
+  const { signIn } = useAuth({ email: "abc", password: "222" });
+
   return (
     <div className="min-h-screen">
-      <header>
-        <div className="bg-[#1e0f41] p-4">
-          <div className="container mx-auto flex max-w-6xl items-center justify-between">
-            <img src="/public/assets/iklogolight.svg" className="w-40" />
-            <h3 className="text-2xl font-bold text-white">
-              Aradığın <span className="text-[#00b078]">"</span>İş
-              <span className="text-[#00b078]">"</span> Burada!
-            </h3>
-            <StyledButton color="green" size="medium">
-              Başvur
-            </StyledButton>
-          </div>
-        </div>
-      </header>
+      <LoginHeader />
       <nav className="bg-black">
         <div className="flex w-full items-center justify-between p-4 text-white">
           <img src="/public/assets/tobetologobeyaz.png" className="w-40" />
@@ -63,7 +52,6 @@ const LoginPage = () => {
                 className="h-auto w-60"
               />
               <form
-                action=""
                 onSubmit={(e) => e.preventDefault()}
                 className="flex w-full flex-col items-center justify-center space-y-6"
               >
@@ -78,7 +66,7 @@ const LoginPage = () => {
                   className="h-12 w-full rounded-xl bg-slate-200 p-4"
                 />
 
-                <StyledButton size="large" onClick={() => dispatch(login())}>
+                <StyledButton size="large" onClick={signIn}>
                   Giriş Yap
                 </StyledButton>
 

@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
 import App from "../App";
 import { RootState } from "../store";
+import { useEffect } from "react";
+import videoService from "../services/videoService";
 
 const HomePage = () => {
-  // const userState = useSelector(({ user }: RootState) => user.user);
-  // const dispatch = useDispatch();
-  // console.log(userState);
+  useEffect(() => {
+    videoService.getAll().then();
+    videoService.delete(1).then();
+  });
   return (
     <>
       <App />
