@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import ReactCalendarHeatmap from "react-calendar-heatmap";
 import { Chart } from "chart.js/auto";
 import "react-calendar-heatmap/dist/styles.css";
@@ -24,6 +24,7 @@ const Pcard = ({
   chart,
 }: ProfileCardProps) => {
   const [sourceData, setSourceData] = useState<DataItem[]>([]);
+  const chartRef = useRef<Chart>();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,29 +51,31 @@ const Pcard = ({
       ) as HTMLCanvasElement;
 
       if (canvasElement) {
-        const existingChart = Chart.getChart(canvasElement);
-
-        if (existingChart) {
-          existingChart.destroy();
+        if (!chartRef.current) {
+          chartRef.current = new Chart(canvasElement, {
+            type: "radar",
+            data: {
+              labels: sourceData.map((data) => data.label),
+              datasets: [
+                {
+                  label: "Count",
+                  data: sourceData.map((data) => data.value),
+                  backgroundColor: [
+                    "rgba(43,63,229,0.8)",
+                    "rgba(250,192,19,0.8)",
+                    "rgba(253,135,135,0.8)",
+                  ],
+                },
+              ],
+            },
+          });
+        } else {
+          chartRef.current.data.labels = sourceData.map((data) => data.label);
+          chartRef.current.data.datasets[0].data = sourceData.map(
+            (data) => data.value
+          );
+          chartRef.current.update();
         }
-
-        new Chart(canvasElement, {
-          type: "radar",
-          data: {
-            labels: sourceData.map((data) => data.label),
-            datasets: [
-              {
-                label: "Count",
-                data: sourceData.map((data) => data.value),
-                backgroundColor: [
-                  "rgba(43,63,229,0.8)",
-                  "rgba(250,192,19,0.8)",
-                  "rgba(253,135,135,0.8)",
-                ],
-              },
-            ],
-          },
-        });
       }
     }
   }, [chart, sourceData]);
@@ -87,8 +90,7 @@ const Pcard = ({
         ) : (
           <p>
             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti,
-            id saepe impedit tempore ipsum inventore odio! Mollitia voluptates
-            quisquam laboriosam.
+            id saepe impedit
           </p>
         )}
       </span>

@@ -1,3 +1,4 @@
+import React from "react";
 import { Radar } from "react-chartjs-2";
 
 const RadarChart = () => {
@@ -37,21 +38,17 @@ const RadarChart = () => {
     ],
   };
 
-  const config = {
-    type: "radar",
-    data: data,
-    options: {
-      elements: {
-        line: {
-          borderWidth: 3,
-        },
+  const options = {
+    elements: {
+      line: {
+        borderWidth: 3,
       },
     },
   };
 
   return (
-    <div className="w-4xl aspect-square h-auto p-4">
-      <Radar data={data} options={config.options} />
+    <div className="w-96 h-96 p-4">
+      <Radar data={data} options={options} />
     </div>
   );
 };

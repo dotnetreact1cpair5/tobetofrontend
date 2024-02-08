@@ -1,22 +1,17 @@
 import React from "react";
-
-interface ProfileData {
-  firstName: string;
-  lastName: string;
-  birthDate: string;
-  phoneNumber: string;
-  email: string;
-}
+import { Account } from "../../models/accountModel";
 
 interface PdatacardProps {
-  data: ProfileData | null;
+  data: Account | null;
 }
 
 const Pdatacard: React.FC<PdatacardProps> = ({ data }) => {
   if (!data) {
     return <div>No data available</div>;
   }
-  const formattedBirthDate = new Date(data.birthDate).toLocaleDateString("tr-TR");
+  const formattedBirthDate = new Date(data.birthDate).toLocaleDateString(
+    "tr-TR"
+  );
   return (
     <div className="flex flex-col justify-around space-y-8 rounded-2xl p-4 shadow-2xl">
       <div className="">
@@ -31,7 +26,9 @@ const Pdatacard: React.FC<PdatacardProps> = ({ data }) => {
           <img src="/cv-name.svg" alt="Name Icon" />
           <div className="flex flex-col">
             <h5 className="text-xs">Ad Soyad</h5>
-            <span className="font-semibold">{data.firstName} {data.lastName}</span>
+            <span className="font-semibold">
+              {data.firstName} {data.lastName}
+            </span>
           </div>
         </div>
         <div className="flex space-x-4">
