@@ -6,9 +6,10 @@ import videoService from "../services/videoService";
 
 const HomePage = () => {
   useEffect(() => {
-    videoService.getAll().then();
-    videoService.delete(1).then();
-  });
+    // videoService.getAll().then();
+    // videoService.delete(1).then();
+  }, []);
+
   return (
     <>
       <App />

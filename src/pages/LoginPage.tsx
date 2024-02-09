@@ -9,23 +9,33 @@ import authService from "../services/authService";
 import { authActions } from "../slices/authhSlice";
 import { userActions } from "../slices/userSlice";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { OverlayLoader } from "../components/helpers/OverlayLoader/OverlayLoader";
+
+type FormFields = {
+  email: string;
+  password: string;
+};
 
 const LoginPage = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<FormFields>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: RootState) => state.authh.isAuthenticated
   );
-  // console.log(isAuthenticated);
-  if (isAuthenticated) navigate("/");
+  console.log(isAuthenticated);
 
-  const handleLogin: SubmitHandler<any> = (data) => {
-     console.log(data);
+  // const loading = useSelector((state: RootState) => state.loading.requestCount);
+  const handleLogin: SubmitHandler<FormFields> = (data: any) => {
+    console.log("submitted");
+    console.log(data);
+
     authService.login(data).then((response) => {
-      if (response.data !== undefined) {
+      console.log(response);
+      if (response?.data) {
         dispatch(authActions.addToken({ token: response.data.token }));
-        dispatch(userActions.getUserInfo({}));
+        // dispatch(userActions.getUserInfo({}));
         navigate("/");
       }
     });
@@ -70,7 +80,7 @@ const LoginPage = () => {
                 className="flex w-full flex-col items-center justify-center space-y-6"
               >
                 <input
-                  {...register("emailAddress", {
+                  {...register("email", {
                     required: "Bu alanin doldurulmasi zorunludur.",
                   })}
                   type="text"
@@ -80,7 +90,6 @@ const LoginPage = () => {
                 <input
                   {...register("password", {
                     required: "Bu alanin doldurulmasi zorunludur.",
-                    minLength: 8,
                   })}
                   type="text"
                   placeholder="Şifreniz"
