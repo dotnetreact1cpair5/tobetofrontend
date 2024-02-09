@@ -11,7 +11,16 @@ const getInitialState = () => {
 const authhSlice = createSlice({
   name: "auth",
   initialState: getInitialState(),
-  reducers: {},
+  reducers: {
+    addToken: (state, action) => {
+      tokenService.setToken(action.payload);
+      state.isAuthenticated = true;
+    },
+    removeToken: (state) => {
+      tokenService.removeToken;
+      state.isAuthenticated = false;
+    },
+  },
 });
 
 export const authhReducer = authhSlice.reducer;

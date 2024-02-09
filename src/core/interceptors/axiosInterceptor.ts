@@ -3,6 +3,7 @@ import { BASE_API_URL } from "../../environment/environment";
 import tokenService from "../services/tokenService";
 import { store } from "../../store";
 import { removeRequest } from "../../slices/loadingSlice";
+import { handleError } from "../errorHandlers/errorHandlers";
 
 const axiosInstance = axios.create({
   baseURL: BASE_API_URL,
@@ -21,7 +22,7 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    handleError(error);
+    if (error.response) handleError(error);
     store.dispatch(removeRequest());
     return error;
   }

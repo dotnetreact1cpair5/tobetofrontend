@@ -33,9 +33,10 @@ export const userSlice = createSlice({
       state.value.user = action.payload;
       state.value.isLoading = false;
     },
+    getUserInfo: (state, action) => {
+      state.value.user = action.payload;
+    },
   },
 });
-export const { setUser } = userSlice.actions;
-// export const { changeName } = userSlice.actions;
-// export const userReducer = userSlice.reducer;
-export default userSlice.reducer;
+export const userActions = userSlice.actions;
+export const userReducer = userSlice.reducer;

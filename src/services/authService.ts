@@ -4,6 +4,9 @@ class AuthService {
   register(model: any) {
     return axiosInstance.post("Auth/register", model);
   }
+  login(model: any) {
+    return axiosInstance.post("Auth/login", model);
+  }
 }
 
 export default new AuthService();

@@ -17,6 +17,7 @@
     "react-calendar-heatmap": "^1.9.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.50.1",
     "react-redux": "^9.0.4",
     "react-router-dom": "^6.21.1",
     "styled-components": "^6.1.8"

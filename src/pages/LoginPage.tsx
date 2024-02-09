@@ -5,18 +5,32 @@ import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import LoginHeader from "../components/LoginHeader";
 import { loginAsync } from "../slices/authSlice";
+import authService from "../services/authService";
+import { authActions } from "../slices/authhSlice";
+import { userActions } from "../slices/userSlice";
+import { useForm } from "react-hook-form";
 
 const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
+    (state: RootState) => state.authh.isAuthenticated
   );
+  console.log(isAuthenticated);
   if (isAuthenticated) navigate("/");
-  const user = useSelector((state: RootState) => state.auth.user);
 
-  const { signIn } = useAuth({ email: "abc", password: "222" });
-
+  const handleSubmit = (data, e) => {
+    console.log(data);
+    e.preventDefault();
+    authService.login(data).then((response) => {
+      if (response.data !== undefined) {
+        dispatch(authActions.addToken({ token: response.data.token }));
+        dispatch(userActions.getUserInfo({}));
+        navigate("/");
+      }
+    });
+  };
+  const { register, handleSubmit } = useForm();
   return (
     <div className="min-h-screen">
       <LoginHeader />
@@ -52,23 +66,28 @@ const LoginPage = () => {
                 className="h-auto w-60"
               />
               <form
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={() => handleSubmit}
                 className="flex w-full flex-col items-center justify-center space-y-6"
               >
                 <input
+                  {...register("emailAddress", {
+                    required: "Bu alanin doldurulmasi zorunludur.",
+                  })}
                   type="text"
                   placeholder="E-mail adresiniz"
                   className="h-12 w-full rounded-xl bg-slate-200 p-4"
                 />
                 <input
+                  {...register("password", {
+                    required: "Bu alanin doldurulmasi zorunludur.",
+                    minLength: 8,
+                  })}
                   type="text"
                   placeholder="Şifreniz"
                   className="h-12 w-full rounded-xl bg-slate-200 p-4"
                 />
 
-                <StyledButton size="large" onClick={signIn}>
-                  Giriş Yap
-                </StyledButton>
+                <StyledButton size="large">Giriş Yap</StyledButton>
 
                 <button>Şifremi Unuttum</button>
               </form>
