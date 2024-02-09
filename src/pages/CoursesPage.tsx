@@ -6,7 +6,7 @@ import { RootState } from "../store";
 
 const CoursesPage = () => {
   // const { data, loading, error } = useCourseList();
-  // console.log({ data, loading, error });
+  // console.log({ data, loading, error });catalogaccor
 
   const selectAllCourses = useSelector((state: RootState) => state.courses);
   console.log(selectAllCourses);

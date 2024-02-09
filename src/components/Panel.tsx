@@ -15,6 +15,8 @@ function Panel() {
     const response = await fetch(
       "http://localhost:49805/api/Course?PageIndex=0&PageSize=4"
     );
+
+    
     const { items } = await response.json();
     setCourses(items);
     // let typescript infer the types by itself as much as possible.
