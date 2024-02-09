@@ -8,20 +8,20 @@ import { loginAsync } from "../slices/authSlice";
 import authService from "../services/authService";
 import { authActions } from "../slices/authhSlice";
 import { userActions } from "../slices/userSlice";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 const LoginPage = () => {
+  const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: RootState) => state.authh.isAuthenticated
   );
-  console.log(isAuthenticated);
+  // console.log(isAuthenticated);
   if (isAuthenticated) navigate("/");
 
-  const handleSubmit = (data, e) => {
-    console.log(data);
-    e.preventDefault();
+  const handleLogin: SubmitHandler<any> = (data) => {
+     console.log(data);
     authService.login(data).then((response) => {
       if (response.data !== undefined) {
         dispatch(authActions.addToken({ token: response.data.token }));
@@ -30,7 +30,7 @@ const LoginPage = () => {
       }
     });
   };
-  const { register, handleSubmit } = useForm();
+
   return (
     <div className="min-h-screen">
       <LoginHeader />
@@ -66,7 +66,7 @@ const LoginPage = () => {
                 className="h-auto w-60"
               />
               <form
-                onSubmit={() => handleSubmit}
+                onSubmit={handleSubmit(handleLogin)}
                 className="flex w-full flex-col items-center justify-center space-y-6"
               >
                 <input
