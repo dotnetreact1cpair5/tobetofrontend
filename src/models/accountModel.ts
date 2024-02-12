@@ -4,4 +4,5 @@ export interface Account {
   birthDate: string;
   phoneNumber: string;
   email: string;
+  description:string;
 }
