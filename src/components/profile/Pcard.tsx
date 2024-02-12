@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactCalendarHeatmap from "react-calendar-heatmap";
 import { Chart } from "chart.js/auto";
 import "react-calendar-heatmap/dist/styles.css";
@@ -84,16 +84,9 @@ const Pcard = ({
     <div className="flex flex-col items-center rounded-2xl p-4 shadow-2xl">
       <h3 className="text-lg font-bold">{title}</h3>
       <hr className="h-1 w-full border-t-2" />
-      <span>
-        {content ? (
-          content
-        ) : (
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deleniti,
-            id saepe impedit
-          </p>
-        )}
-      </span>
+      {content && (
+        <span>{content}</span>
+      )}
       {badges &&
         badges.map((badge, index) => (
           <div className="badge" key={index}>

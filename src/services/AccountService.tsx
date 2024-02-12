@@ -1,3 +1,4 @@
+// AccountService.js
 import axios from "axios";
 import { Account } from "../models/accountModel";
 
@@ -5,7 +6,7 @@ class AccountService {
   async getProfileData(): Promise<Account | null> {
     try {
       const response = await axios.get<any>(
-        "http://localhost:5045/api/Account?PageIndex=0&PageSize=10"
+        "http://localhost:5045/api/Accounts?PageIndex=0&PageSize=10"
       );
       const userData = response.data?.items[0];
       if (userData) {
@@ -18,10 +19,10 @@ class AccountService {
         };
         return formattedData;
       } else {
-        return null;
+        return null; 
       }
     } catch (error) {
-      throw new Error("Veri getirilemedi.");
+      throw new Error("Account service error: "); 
     }
   }
 }
