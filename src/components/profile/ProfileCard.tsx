@@ -30,7 +30,7 @@ const sourceData: DataItem[] = [
   { label: "Anlıyorum ve anlaşılıyorum", value: 90 },
 ];
 
-const Pcard: React.FC<ProfileCardProps> = ({
+const ProfileCard: React.FC<ProfileCardProps> = ({
   data,
   title,
   content,
@@ -95,4 +95,4 @@ const Pcard: React.FC<ProfileCardProps> = ({
   );
 };
 
-export default Pcard;
+export default ProfileCard;

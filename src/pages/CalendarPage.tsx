@@ -1,6 +1,6 @@
 import React from "react";
 import FilterSection from "../components/calendar/FilterSection";
-import Calendar from "../components/calendar/Calendar";
+import Calendar from "../components/calendar/calendar";
 
 const handleAddEvent = (newEvent: { title: string; start: Date }) => {
   console.log("Yeni etkinlik:", newEvent);

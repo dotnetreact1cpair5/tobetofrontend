@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Pcard from "../components/profile/ProfileCard";
-import Pdatacard from "../components/profile/ProfileDataCard";
+import ProfileCard from "../components/profile/ProfileCard";
+import ProfileDataCard from "../components/profile/ProfileDataCard";
 import AccountService from "../services/AccountService";
 import ForeignLanguageService from "../services/ForeignLanguageService";
 import SocialMediaService from "../services/SocialMediaService";
@@ -56,23 +56,23 @@ const ProfilePage = () => {
       <div className="col-span-1 w-full space-y-8">
         {loading && <div>Loading...</div>}
         {fetchError && <div>Error: {fetchError}</div>}
-        <Pdatacard data={accountData} />
-        <Pcard title="Hakkımda" data={languageData} />
-        <Pcard title="Yetkinliklerim" data={skillData} />
-        <Pcard title="Yabancı Dillerim" data={languageData} />
-        <Pcard title="Sertifikalarım" data={certificateData} />
-        <Pcard title="Medya Hesaplarım" data={socialMediaData} />
+        <ProfileDataCard data={accountData} />
+        <ProfileCard title="Hakkımda" data={languageData} />
+        <ProfileCard title="Yetkinliklerim" data={skillData} />
+        <ProfileCard title="Yabancı Dillerim" data={languageData} />
+        <ProfileCard title="Sertifikalarım" data={certificateData} />
+        <ProfileCard title="Medya Hesaplarım" data={socialMediaData} />
       </div>
       <div className="col-span-2 w-full space-y-8">
-        <Pcard title="Tobeto İşte Başarı Modelim" chart={true} />
-        <Pcard title="Tobeto Seviye Testlerim" data={languageData} />
-        <Pcard
+        <ProfileCard title="Tobeto İşte Başarı Modelim" chart={true} />
+        <ProfileCard title="Tobeto Seviye Testlerim" data={languageData} />
+        <ProfileCard
           title="Yetkinlik Rozetlerim"
           data={languageData}
           badges={["a", "b", "c"]}
         />
-        <Pcard title="Aktivite Haritam" activity={true} />
-        <Pcard title="Eğitim Hayatım ve Deneyimlerim" data={languageData} />
+        <ProfileCard title="Aktivite Haritam" activity={true} />
+        <ProfileCard title="Eğitim Hayatım ve Deneyimlerim" data={languageData} />
       </div>
     </main>
   );

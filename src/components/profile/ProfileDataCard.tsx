@@ -1,11 +1,11 @@
 import React from "react";
 import { Account } from "../../models/accountModel";
 
-interface PdatacardProps {
+interface ProfileDataCardProps {
   data: Account | null;
 }
 
-const Pdatacard: React.FC<PdatacardProps> = ({ data }) => {
+const ProfileDataCard: React.FC<ProfileDataCardProps> = ({ data }) => {
   if (!data) {
     return <div>No data available</div>;
   }
@@ -57,4 +57,4 @@ const Pdatacard: React.FC<PdatacardProps> = ({ data }) => {
   );
 };
 
-export default Pdatacard;
+export default ProfileDataCard;
