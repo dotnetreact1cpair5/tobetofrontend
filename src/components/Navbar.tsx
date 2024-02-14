@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import tbtLogo from "../assets/tbtlogo.svg";
+import tbtLogo from "/assets/tbtlogo.svg";
 import { useState } from "react";
 import { Dropdown } from "flowbite-react";
 import { useDispatch } from "react-redux";
@@ -12,7 +12,7 @@ function Navbar() {
       <nav>
         <div className="flex h-[93px] items-center justify-between border-b-[1px] border-[#f8f3fb] p-4">
           <a href="">
-            <img src="../assets/tobetocolored.png" alt="" className="w-40" />
+            <img src="/assets/tbtlogo.svg" alt="" className="w-40" />
           </a>
           <ul className="flex space-x-7">
             <li>
@@ -45,7 +45,7 @@ function Navbar() {
                 onClick={() => setIsOpen(!isOpen)}
               >
                 <img
-                  src="../assets/pfp.png"
+                  src="/assets/pfp.png"
                   alt=""
                   className="w-10 rounded-full"
                 />

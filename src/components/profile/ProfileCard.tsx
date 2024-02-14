@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { Card } from 'flowbite-react';
+import React, { ReactNode } from "react";
+import { Card } from "flowbite-react";
 
 interface ProfileCardProps {
   title?: string;
@@ -7,18 +7,18 @@ interface ProfileCardProps {
   isShareImgVisible?: boolean;
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ title, children, isShareImgVisible = true }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({
+  title,
+  children,
+  isShareImgVisible = true,
+}) => {
   return (
-    <Card className="row-span-2 col-span-2">
+    <Card className="col-span-2 row-span-2">
       <div className="section-title-container">
         <p className="section-title">
           {title}
           {isShareImgVisible && (
-            <img
-              src="/public/eye.svg"
-              alt="share"
-              className="ali"
-            />
+            <img src="/assets/eye.svg" alt="share" className="ali" />
           )}
         </p>
         <hr className="section-divider" />

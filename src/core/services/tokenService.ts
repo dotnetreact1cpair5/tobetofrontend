@@ -1,8 +1,12 @@
-import { LoginResponse } from "../../models/responses/loginResponse";
+interface LoginResponse {
+  token: string;
+}
 
 class TokenService {
-  getToken(): string | null {
-    return localStorage.getItem("token");
+  getToken(): any {
+    const token = localStorage.getItem("token");
+    console.log(token);
+    return token;
   }
   hasToken(): boolean {
     return localStorage.getItem("token") != null;

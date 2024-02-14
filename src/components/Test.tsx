@@ -9,11 +9,11 @@ function Test() {
           </h3>
           <span className="text-sm font-normal">Herkes İçin Kodlama - 1C</span>
           <span className="flex space-x-2">
-            <img src="../assets/timer.svg" className="w-5" />{" "}
+            <img src="/assets/timer.svg" className="w-5" />{" "}
             <span className="font-bold">45 Dakika</span>
           </span>
           <img
-            src="../assets/check.svg"
+            src="/assets/check.svg"
             alt=""
             className="absolute right-4 top-4 w-5"
           />

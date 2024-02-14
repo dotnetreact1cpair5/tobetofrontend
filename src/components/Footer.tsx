@@ -5,7 +5,7 @@ function Footer() {
         <div className="logo">
           <a href="#">
             <img
-              src="../assets/tobetologowhite.png"
+              src="/assets/tobetologowhite.png"
               alt=""
               className="w-30 h-5"
             />

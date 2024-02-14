@@ -32,10 +32,10 @@ const LoginPage = () => {
     console.log(data);
 
     authService.login(data).then((response) => {
-      console.log(response);
-      if (response?.data) {
+      // console.log(response);
+      if (response.data?.token) {
         dispatch(authActions.addToken({ token: response.data.token }));
-        // dispatch(userActions.getUserInfo({}));
+        dispatch(userActions.getUser());
         navigate("/");
       }
     });
@@ -46,7 +46,7 @@ const LoginPage = () => {
       <LoginHeader />
       <nav className="bg-black">
         <div className="flex w-full items-center justify-between p-4 text-white">
-          <img src="/public/assets/tobetologobeyaz.png" className="w-40" />
+          <img src="/assets/tobetologobeyaz.png" className="w-40" />
           <ul className="flex justify-around space-x-8 p-2">
             <li>
               Biz Kimiz?
@@ -71,10 +71,7 @@ const LoginPage = () => {
         <div className="container mx-auto grid w-3/4 grid-cols-2 place-items-center space-x-12">
           <div className="rainbow-card flex h-[425px] w-3/4 justify-self-end p-2">
             <div className="flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
-              <img
-                src="/public/assets/tobetocolored.png"
-                className="h-auto w-60"
-              />
+              <img src="/assets/tobetocolored.png" className="h-auto w-60" />
               <form
                 onSubmit={handleSubmit(handleLogin)}
                 className="flex w-full flex-col items-center justify-center space-y-6"
@@ -108,7 +105,7 @@ const LoginPage = () => {
           </div>
           <div className="rainbow-card flex h-[425px] w-3/4 justify-self-start p-2">
             <div className="flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
-              <img src="/public/assets/iklogo.svg" className="h-auto w-60" />
+              <img src="/assets/iklogo.svg" className="h-auto w-60" />
               <span className="w-1/3 border-b-2 border-b-[#00b078]"></span>
               <p className="text-2xl font-bold">
                 Aradığın <span className="text-[#00b078]">"</span>İş
@@ -122,10 +119,7 @@ const LoginPage = () => {
       <footer className="bg-black p-10">
         <div className="container mx-auto flex items-center justify-between text-white">
           <div>
-            <img
-              src="/public/assets/tobeto-logo-mini.png"
-              className="h-7 w-32"
-            />
+            <img src="/assets/tobeto-logo-mini.png" className="h-7 w-32" />
           </div>
           <div>© 2024 Tobeto Platform Clone Project</div>
           <div>

@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import courseService from "../services/courseService";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+
+// const id = useSelector((state: RootState) => state.user.user?.id);
 
 interface Course {
   id: number;
@@ -7,53 +12,76 @@ interface Course {
   createdDate: string;
   imageUrl: string;
 }
-
+// export interface Course {
+//   id: number;
+//   name: string;
+//   accountId: number;
+//   userId: number;
+//   categoryName: string;
+//   organizationName: string;
+//   contentTypeId: number;
+//   contentTypeName: string;
+//   pathFileId: number;
+//   estimatedVideoDuration: string;
+//   startDate: Date;
+//   endDate: Date;
+// }
 interface CoursesState {
-  courses: Course[];
-  loading: boolean;
+  courses: Course[] | null;
+  isLoading: boolean;
   error: string | null;
 }
 
 const initialState: CoursesState = {
   courses: [],
-  loading: true,
+  isLoading: true,
   error: null,
 };
+// const asyncFunction = () => {
+//   return new Promise((resolve) => {
+//     return resolve;
+//   });
+// };
+// const apiFetch = async () => {
+//   await asyncFunction();
+// };
 
 export const fetchCourses = createAsyncThunk(
   "courses/fetchCourses",
   async () => {
-    const response = await axios.get<Course[]>(
-      "http://localhost:49805/api/Course?PageIndex=0&PageSize=10"
-    );
+    const response = await courseService.getAllCourses();
     console.log(response.data);
 
-    // return response.data as Post[];
     return response.data;
   }
 );
-
 export const coursesSlice = createSlice({
   name: "courses",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(fetchCourses.fulfilled, (state, action) => {
-      state.loading = false;
-      state.error = null;
-      state.courses = action.payload;
-    });
-    builder.addCase(fetchCourses.pending, (state) => {
-      state.loading = true;
-      state.error = null;
-    });
-
-    builder.addCase(fetchCourses.rejected, (state, action) => {
-      state.loading = false;
-
-      state.error = action.error.message || "Failed to fetch courses";
-    });
+  reducers: {
+    getUserCourses: (state) => {
+      // state.courses = fetchCourses();
+    },
   },
+
+  // extraReducers: (builder) => {
+  //   builder.addCase(fetchCourses.fulfilled, (state, action) => {
+  //     state.loading = false;
+  //     state.error = null;
+  //     state.courses = action.payload;
+  //   });
+  //   builder.addCase(fetchCourses.pending, (state) => {
+  //     state.loading = true;
+  //     state.error = null;
+  //   });
+
+  //   builder.addCase(fetchCourses.rejected, (state, action) => {
+  //     state.loading = false;
+
+  //     state.error = action.error.message || "Failed to fetch courses";
+  //   });
+  // },
 });
 
-export default coursesSlice.reducer;
+export const coursesReducer = coursesSlice.reducer;
+export const { getUserCourses } = coursesSlice.actions;

@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import CourseList from "../components/courses/CourseList";
 import useCourseList from "../hooks/useCourseList";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
+import { getUserCourses } from "../slices/coursesSlice";
 
 const CoursesPage = () => {
-  // const { data, loading, error } = useCourseList();
-  // console.log({ data, loading, error });
-
-  const selectAllCourses = useSelector((state: RootState) => state.courses);
-  console.log(selectAllCourses);
-
+  // const dispatch = useDispatch();
+  // const coursesss = dispatch(getUserCourses());
+  // const selectAllCourses = useSelector((state: RootState) => state.courses);
+  // console.log(selectAllCourses);
   useEffect(() => {
     fetchAllCourses();
   }, []);
+
   const [courses, setCourses] = useState([]);
   const fetchAllCourses = async () => {
     const response = await fetch(
@@ -22,9 +22,6 @@ const CoursesPage = () => {
     const { items } = await response.json();
     console.log(items);
     setCourses(items);
-    // const data: Record<string, unknown> = await response.json();
-    // const { items } = data;
-    // setCourses(Object.values(data.items));
   };
   return <CourseList courses={courses} />;
 };
