@@ -6,10 +6,12 @@ import { RootState } from "../store";
 import { getUserCourses } from "../slices/coursesSlice";
 
 const CoursesPage = () => {
-  // const dispatch = useDispatch();
-  // const coursesss = dispatch(getUserCourses());
-  // const selectAllCourses = useSelector((state: RootState) => state.courses);
-  // console.log(selectAllCourses);
+  // const { data, loading, error } = useCourseList();
+  // console.log({ data, loading, error });catalogaccor
+
+  const selectAllCourses = useSelector((state: RootState) => state.courses);
+  console.log(selectAllCourses);
+
   useEffect(() => {
     fetchAllCourses();
   }, []);
