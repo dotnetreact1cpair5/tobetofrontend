@@ -1,28 +1,24 @@
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import FilterSection from "../components/calendar/FilterSection";
+import Calendar from "../components/calendar/calendar";
 
-import { useEffect } from "react";
-import { fetchPosts, selectAllPosts } from "../slices/postsSlice";
-import { AppDispatch, RootState } from "../store";
+const handleAddEvent = (newEvent: { title: string; start: Date }) => {
+  console.log("Yeni etkinlik:", newEvent);
+};
 
-function Calendar() {
-  const dispatch: AppDispatch = useDispatch();
-  const postsData = useSelector(selectAllPosts);
-  const data = useSelector((state: RootState) => state.posts.posts);
-  // console.log(data);
-  // console.log(postsData);
-  // console.log(useSelector((state: RootState) => state));
-  console.log(useSelector((state: RootState) => state.courses.courses));
-  useEffect(() => {
-    dispatch(fetchPosts());
-  }, []);
-
+const CalendarPage = () => {
   return (
-    <div>
-      {postsData.map((post) => {
-        return <p key={post.id}>{post.title}</p>;
-      })}
-      <button onClick={() => dispatch(fetchPosts())}>click me</button>
+    <div className="container mx-auto mt-8">
+      <div className="grid grid-cols-4 gap-4">
+        <div className="col-span-1">
+          <FilterSection handleAddEvent={handleAddEvent} />
+        </div>
+        <div className="col-span-3">
+          <Calendar />
+        </div>
+      </div>
     </div>
   );
-}
-export default Calendar;
+};
+
+export default CalendarPage;

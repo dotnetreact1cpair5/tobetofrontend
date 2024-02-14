@@ -1,25 +1,30 @@
-export async function fetchAccountData() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users/");
+import axios from "axios";
+import { Account } from "../models/accountModel";
 
-    if (!response.ok) {
-      throw new Error("Veri çekme hatası!");
+class AccountService {
+  static async getProfileData(): Promise<Account | null> {
+    try {
+      const response = await axios.get<any>(
+        "http://localhost:5045/api/Accounts?PageIndex=0&PageSize=10"
+      );
+      const userData = response.data?.items[0];
+      if (userData) {
+        const formattedData: Account = {
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          birthDate: userData.birthDate,
+          phoneNumber: userData.phoneNumber,
+          email: userData.email,
+          description:userData.description
+        };
+        return formattedData;
+      } else {
+        return null; 
+      }
+    } catch (error) {
+      throw new Error("Account service error: "); 
     }
-
-    const { items } = await response.json();
-
-    if (
-      !responseData ||
-      !responseData.items ||
-      !Array.isArray(responseData.items)
-    ) {
-      console.error("Alınan veri beklenen formatta değil:", responseData);
-      throw new Error("Alınan veri beklenen formatta değil");
-    }
-
-    return items;
-  } catch (error) {
-    console.error("Veri alınırken hata oluştu!:", error);
-    return [];
   }
 }
+
+export default AccountService;

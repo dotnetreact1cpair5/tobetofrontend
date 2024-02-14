@@ -37,5 +37,5 @@ const useAuth = ({ email, password }: { email: string; password: string }) => {
 
   return { signIn, signUp };
 };
+export default useAuth; //
 
-export default useAuth;

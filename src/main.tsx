@@ -19,7 +19,7 @@ import CoursesPage from "./pages/CoursesPage.js";
 import HomePage from "./pages/HomePage.js";
 import { Provider, useSelector } from "react-redux";
 import { RootState, store } from "./store.js";
-import PPage from "./pages/PPage.js";
+import ProfilePage from "./pages/ProfilePage.js";
 import LoginPage from "./pages/LoginPage.js";
 import PrivateRoutes from "./utils/PrivateRoutes.js";
 
@@ -30,7 +30,7 @@ const router = createBrowserRouter(
       <Route path="/" element={<PrivateRoutes />}>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path="/profilim" element={<PPage />} />
+          <Route path="/profilim" element={<ProfilePage />} />
           <Route path="/degerlendirmeler" element={<Assessments />} />
           <Route path="/katalog" element={<Catalogue />} />
           <Route path="/takvim" element={<Calendar />} />
