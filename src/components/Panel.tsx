@@ -15,6 +15,8 @@ function Panel() {
     const response = await fetch(
       "http://localhost:49805/api/Course?PageIndex=0&PageSize=4"
     );
+
+    
     const { items } = await response.json();
     setCourses(items);
     // let typescript infer the types by itself as much as possible.
@@ -24,7 +26,7 @@ function Panel() {
       <div className="container mx-auto max-w-6xl rounded-xl shadow-2xl">
         <div className="logoplatform flex flex-col items-center p-4">
           <img
-            src="../assets/iklogo.svg"
+            src="/assets/iklogo.svg"
             alt=""
             className="h-[160px] w-[300px]"
           />

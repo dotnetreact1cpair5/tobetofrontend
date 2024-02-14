@@ -1,41 +1,36 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import authService from "../services/authService";
 
-interface UserState {
-  value: {
-    user: User | null;
-    isLoading: boolean;
-  };
-}
 interface User {
   email: string;
   username: string;
+  id: number | null;
 }
+
+interface UserState {
+  user: User | null;
+  isLoading: boolean;
+}
+
 const initialState: UserState = {
-  value: {
-    user: null,
-    isLoading: true,
-  },
+  user: null,
+  isLoading: false,
 };
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  // user: { name: "Random Guy", age: 22 },
-
   reducers: {
-    // changeName: (state) => {
-    //   state.user.name = "Random Girl";
-    // },
-    // changeAge: (state) => {
-    //   state.user.age = 24;
-    // },
     setUser: (state, action: PayloadAction<User>) => {
-      state.value.user = action.payload;
-      state.value.isLoading = false;
+      state.user = action.payload;
+      state.isLoading = false;
+    },
+    getUser: (state) => {
+      // state.value.user = action.payload;
+      state.isLoading = true;
+      state.user = authService.getUserInfo();
     },
   },
 });
-export const { setUser } = userSlice.actions;
-// export const { changeName } = userSlice.actions;
-// export const userReducer = userSlice.reducer;
-export default userSlice.reducer;
+export const userActions = userSlice.actions;
+export const userReducer = userSlice.reducer;

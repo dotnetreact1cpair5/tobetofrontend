@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import showMore from "../assets/showmore.svg";
+import showMore from "/assets/showmore.svg";
 const ShowMore = () => {
   return (
     <Link to="/egitimlerim" className="flex flex-col">

@@ -1,39 +1,52 @@
 import { useDispatch, useSelector } from "react-redux";
-import GenericButton from "../components/helpers/GenericButton";
 import StyledButton from "../components/helpers/StyledButton";
 import { RootState } from "../store";
-import { login } from "../slices/authSlice";
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import PrivateRoutes from "../utils/PrivateRoutes";
+import useAuth from "../hooks/useAuth";
+import LoginHeader from "../components/LoginHeader";
+import { loginAsync } from "../slices/authSlice";
+import authService from "../services/authService";
+import { authActions } from "../slices/authhSlice";
+import { userActions } from "../slices/userSlice";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { OverlayLoader } from "../components/helpers/OverlayLoader/OverlayLoader";
+
+type FormFields = {
+  email: string;
+  password: string;
+};
 
 const LoginPage = () => {
+  const { register, handleSubmit } = useForm<FormFields>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
-    (state: RootState) => state.auth.isAuthenticated
+    (state: RootState) => state.authh.isAuthenticated
   );
-  if (isAuthenticated) navigate("/");
-  const user = useSelector((state: RootState) => state.auth.user);
+  console.log(isAuthenticated);
+
+  // const loading = useSelector((state: RootState) => state.loading.requestCount);
+  const handleLogin: SubmitHandler<FormFields> = (data: any) => {
+    console.log("submitted");
+    console.log(data);
+
+    authService.login(data).then((response) => {
+      // console.log(response);
+      if (response.data?.token) {
+        dispatch(authActions.addToken({ token: response.data.token }));
+        dispatch(userActions.getUser());
+        navigate("/");
+      }
+    });
+  };
+
   return (
     <div className="min-h-screen">
-      <header>
-        <div className="bg-[#1e0f41] p-4">
-          <div className="container mx-auto flex max-w-6xl items-center justify-between">
-            <img src="/public/assets/iklogolight.svg" className="w-40" />
-            <h3 className="text-2xl font-bold text-white">
-              Aradığın <span className="text-[#00b078]">"</span>İş
-              <span className="text-[#00b078]">"</span> Burada!
-            </h3>
-            <StyledButton color="green" size="medium">
-              Başvur
-            </StyledButton>
-          </div>
-        </div>
-      </header>
+      <LoginHeader />
       <nav className="bg-black">
         <div className="flex w-full items-center justify-between p-4 text-white">
-          <img src="/public/assets/tobetologobeyaz.png" className="w-40" />
+          <img src="/assets/tobetologobeyaz.png" className="w-40" />
           <ul className="flex justify-around space-x-8 p-2">
             <li>
               Biz Kimiz?
@@ -58,29 +71,29 @@ const LoginPage = () => {
         <div className="container mx-auto grid w-3/4 grid-cols-2 place-items-center space-x-12">
           <div className="rainbow-card flex h-[425px] w-3/4 justify-self-end p-2">
             <div className="flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
-              <img
-                src="/public/assets/tobetocolored.png"
-                className="h-auto w-60"
-              />
+              <img src="/assets/tobetocolored.png" className="h-auto w-60" />
               <form
-                action=""
-                onSubmit={(e) => e.preventDefault()}
+                onSubmit={handleSubmit(handleLogin)}
                 className="flex w-full flex-col items-center justify-center space-y-6"
               >
                 <input
+                  {...register("email", {
+                    required: "Bu alanin doldurulmasi zorunludur.",
+                  })}
                   type="text"
                   placeholder="E-mail adresiniz"
                   className="h-12 w-full rounded-xl bg-slate-200 p-4"
                 />
                 <input
+                  {...register("password", {
+                    required: "Bu alanin doldurulmasi zorunludur.",
+                  })}
                   type="text"
                   placeholder="Şifreniz"
                   className="h-12 w-full rounded-xl bg-slate-200 p-4"
                 />
 
-                <StyledButton size="large" onClick={() => dispatch(login())}>
-                  Giriş Yap
-                </StyledButton>
+                <StyledButton size="large">Giriş Yap</StyledButton>
 
                 <button>Şifremi Unuttum</button>
               </form>
@@ -92,7 +105,7 @@ const LoginPage = () => {
           </div>
           <div className="rainbow-card flex h-[425px] w-3/4 justify-self-start p-2">
             <div className="flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
-              <img src="/public/assets/iklogo.svg" className="h-auto w-60" />
+              <img src="/assets/iklogo.svg" className="h-auto w-60" />
               <span className="w-1/3 border-b-2 border-b-[#00b078]"></span>
               <p className="text-2xl font-bold">
                 Aradığın <span className="text-[#00b078]">"</span>İş
@@ -106,10 +119,7 @@ const LoginPage = () => {
       <footer className="bg-black p-10">
         <div className="container mx-auto flex items-center justify-between text-white">
           <div>
-            <img
-              src="/public/assets/tobeto-logo-mini.png"
-              className="h-7 w-32"
-            />
+            <img src="/assets/tobeto-logo-mini.png" className="h-7 w-32" />
           </div>
           <div>© 2024 Tobeto Platform Clone Project</div>
           <div>
