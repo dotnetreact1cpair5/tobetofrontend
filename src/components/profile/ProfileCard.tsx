@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import ReactCalendarHeatmap from "react-calendar-heatmap";
 import { Chart } from "chart.js/auto";
 import "react-calendar-heatmap/dist/styles.css";

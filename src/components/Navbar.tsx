@@ -12,7 +12,7 @@ function Navbar() {
       <nav>
         <div className="flex h-[93px] items-center justify-between border-b-[1px] border-[#f8f3fb] p-4">
           <a href="">
-            <img src="/assets/tbtlogo.svg" alt="" className="w-40" />
+            <img src="/assets/tobetocolored.png" alt="" className="w-40" />
           </a>
           <ul className="flex space-x-7">
             <li>
