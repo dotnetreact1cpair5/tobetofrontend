@@ -47,7 +47,7 @@ const RadarChart = () => {
   };
 
   return (
-    <div className="w-96 h-96 p-4">
+    <div className="h-96 w-96 p-4">
       <Radar data={data} options={options} />
     </div>
   );
