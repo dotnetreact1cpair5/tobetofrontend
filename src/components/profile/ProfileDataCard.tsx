@@ -22,7 +22,7 @@ const ProfileDataCard: React.FC<ProfileDataCardProps> = ({ data }) => {
       </div>
       <div className="space-y-4">
         <div className="flex space-x-4">
-          <img src="/cv-name.svg" alt="Name Icon" />
+          <img src="/assets/cv-name.svg" alt="Name Icon" />
           <div className="flex flex-col">
             <h5 className="text-xs">Ad Soyad</h5>
             <span className="font-semibold">
@@ -31,21 +31,21 @@ const ProfileDataCard: React.FC<ProfileDataCardProps> = ({ data }) => {
           </div>
         </div>
         <div className="flex space-x-4">
-          <img src="/cv-date.svg" alt="Date Icon" />
+          <img src="/assets/cv-date.svg" alt="Date Icon" />
           <div className="flex flex-col">
             <h5 className="text-xs">Doğum Tarihi</h5>
             <span className="font-semibold">{formattedBirthDate}</span>
           </div>
         </div>
         <div className="flex space-x-4">
-          <img src="/cv-mail.svg" alt="Mail Icon" />
+          <img src="/assets/cv-mail.svg" alt="Mail Icon" />
           <div className="flex flex-col">
             <h5 className="text-xs">E-Posta Adresi</h5>
             <span className="font-semibold">{data.email}</span>
           </div>
         </div>
         <div className="flex space-x-4">
-          <img src="/cv-phone.svg" alt="Phone Icon" />
+          <img src="/assets/cv-phone.svg" alt="Phone Icon" />
           <div className="flex flex-col">
             <h5 className="text-xs">Telefon Numarası</h5>
             <span className="font-semibold">{data.phoneNumber}</span>

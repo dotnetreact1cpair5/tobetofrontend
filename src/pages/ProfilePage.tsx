@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ProfileCard from "../components/profile/ProfileCard";
 import ProfileDataCard from "../components/profile/ProfileDataCard";
-// import AccountService from "../services/AccountService";
+import AccountService from "../services/AccountService";
 import ForeignLanguageService from "../services/ForeignLanguageService";
 import SocialMediaService from "../services/SocialMediaService";
 import SkillService from "../services/SkillService";
@@ -30,13 +30,13 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const account = await AccountService.getProfileData();
+        const account = await AccountService.getProfileData();
         const language = await ForeignLanguageService.getForeignLanguageData();
         const socialMedia = await SocialMediaService.getSocialMediaData();
         const skill = await SkillService.getSkillData();
         const certificate = await CertificateService.getCertificateData();
 
-        // setAccountData(account);
+        setAccountData(account);
         setLanguageData(language);
         setSocialMediaData(socialMedia);
         setSkillData(skill);
