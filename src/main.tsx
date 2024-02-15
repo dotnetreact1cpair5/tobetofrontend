@@ -26,7 +26,7 @@ import PrivateRoutes from "./utils/PrivateRoutes.js";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
-      <Route path="/login" element={<LoginPage />} />
+      {/* <Route path="/login" element={<LoginPage />} /> */}
       <Route path="/" element={<PrivateRoutes />}>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />

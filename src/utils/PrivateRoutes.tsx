@@ -7,7 +7,8 @@ const PrivateRoutes = () => {
     (state: RootState) => state.authh.isAuthenticated
   );
 
-  return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  // return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
+  return <Outlet />
 };
 
 export default PrivateRoutes;
