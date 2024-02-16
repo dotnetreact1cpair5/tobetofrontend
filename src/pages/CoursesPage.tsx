@@ -1,30 +1,20 @@
-import { useEffect, useState } from "react";
-import CourseList from "../components/courses/CourseList";
-import useCourseList from "../hooks/useCourseList";
+import { AppDispatch, RootState } from "../store";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
-import { getUserCourses } from "../slices/coursesSlice";
+import { useEffect } from "react";
+import { fetchAllCourses } from "../slices/coursesSlice";
+import CourseList from "../components/courses/CourseList";
 
 const CoursesPage = () => {
-  // const { data, loading, error } = useCourseList();
-  // console.log({ data, loading, error });catalogaccor
-
-  const selectAllCourses = useSelector((state: RootState) => state.courses);
-  console.log(selectAllCourses);
-
+  const allCourses = useSelector((state: RootState) => state.courses.courses);
+  // console.log(allCourses);
+  const dispatch = useDispatch<AppDispatch>();
+  const userId = useSelector((state: RootState) => state.user.user?.id);
+  // console.log(userId);
   useEffect(() => {
-    fetchAllCourses();
+    dispatch(fetchAllCourses(userId));
   }, []);
 
-  const [courses, setCourses] = useState([]);
-  const fetchAllCourses = async () => {
-    const response = await fetch(
-      "http://localhost:49805/api/Course?PageIndex=0&PageSize=10"
-    );
-    const { items } = await response.json();
-    console.log(items);
-    setCourses(items);
-  };
-  return <CourseList courses={courses} />;
+  return <CourseList list={allCourses} />;
 };
+
 export default CoursesPage;

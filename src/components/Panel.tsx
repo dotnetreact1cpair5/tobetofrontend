@@ -4,8 +4,8 @@ import ApplicationTab from "./ApplicationTab";
 import CoursesTab from "./courses/CoursesTab";
 import AnnouncementTab from "./AnnouncementTab";
 import SurveyTab from "./SurveyTab";
+import { Course } from "../slices/coursesSlice";
 
-export type Course = { name: string; createdDate: string; id: number };
 function Panel() {
   const [activeTabIndex, setActiveTabIndex] = useState(1);
 
@@ -16,7 +16,6 @@ function Panel() {
       "http://localhost:49805/api/Course?PageIndex=0&PageSize=4"
     );
 
-    
     const { items } = await response.json();
     setCourses(items);
     // let typescript infer the types by itself as much as possible.

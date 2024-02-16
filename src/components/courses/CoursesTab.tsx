@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import showMore from "/assets/showmore.svg";
 import Loading from "../helpers/Loading";
 import CourseCard from "./CourseCard";
-import type { Course } from "../Panel";
+import { Course } from "../../slices/coursesSlice";
 
-type Props = {
+type CourseTabProps = {
   courses: Course[];
 };
 
-const CoursesTab = ({ courses }: Props) => {
+const CoursesTab = ({ courses }: CourseTabProps) => {
   //  TODO: Loading state & a message saying 'there are no courses'. Think of all cases and make components accordingly.
   return (
     <div className="flex flex-col items-center justify-center p-4">

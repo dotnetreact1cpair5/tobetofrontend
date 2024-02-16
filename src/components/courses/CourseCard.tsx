@@ -1,12 +1,13 @@
-import { Course } from "../Panel";
+import { Course } from "../../slices/coursesSlice";
+// import Course from "../Panel";
 
-type Props = {
+type CardProps = {
   course: Course;
 };
 
-const CourseCard = ({ course }: Props) => {
+const CourseCard = ({ course }: CardProps) => {
   console.log(course);
-  let date = new Date(course.createdDate).toLocaleDateString();
+  let date = new Date(course.startDate).toLocaleDateString();
   console.log(date);
   return (
     <div className="coursecard flex h-[320px] w-64 flex-col space-y-3 rounded-xl border-4 border-transparent bg-[#f1f1f1] p-1 shadow-xl transition duration-500 hover:border-violet-500">

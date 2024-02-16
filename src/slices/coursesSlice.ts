@@ -1,87 +1,71 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import courseService from "../services/courseService";
-import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
-// const id = useSelector((state: RootState) => state.user.user?.id);
-
-interface Course {
+export interface Course {
   id: number;
+  accountId: number;
+  userId: number;
+  categoryName: string;
+  organizationName: string;
+  contentTypeId: number;
+  contentTypeName: string;
+  pathFileId: number;
   name: string;
-  createdDate: string;
-  imageUrl: string;
+  estimatedVideoDuration: string;
+  startDate: Date;
+  endDate: Date;
 }
-// export interface Course {
-//   id: number;
-//   name: string;
-//   accountId: number;
-//   userId: number;
-//   categoryName: string;
-//   organizationName: string;
-//   contentTypeId: number;
-//   contentTypeName: string;
-//   pathFileId: number;
-//   estimatedVideoDuration: string;
-//   startDate: Date;
-//   endDate: Date;
-// }
-interface CoursesState {
-  courses: Course[] | null;
+export interface CoursesState {
+  from?: number;
+  index?: number;
+  size?: number;
+  count?: number;
+  pages?: number;
+  hasPrevious?: boolean;
+  hasNext?: boolean;
+  courses: Course[];
   isLoading: boolean;
-  error: string | null;
+  error: null;
 }
-
 const initialState: CoursesState = {
   courses: [],
   isLoading: true,
   error: null,
 };
-// const asyncFunction = () => {
-//   return new Promise((resolve) => {
-//     return resolve;
-//   });
-// };
-// const apiFetch = async () => {
-//   await asyncFunction();
-// };
-
-export const fetchCourses = createAsyncThunk(
-  "courses/fetchCourses",
-  async () => {
-    const response = await courseService.getAllCourses();
-    console.log(response.data);
-
-    return response.data;
+export const fetchAllCourses = createAsyncThunk(
+  "courses/fetchAllCourses",
+  async (userId: any) => {
+    return await courseService.getUserCourses(userId);
   }
 );
 export const coursesSlice = createSlice({
   name: "courses",
   initialState,
   reducers: {
-    getUserCourses: (state) => {
-      // state.courses = fetchCourses();
+    random(state) {
+      // state.courses = courseService.getAllCourses();
     },
   },
-
-  // extraReducers: (builder) => {
-  //   builder.addCase(fetchCourses.fulfilled, (state, action) => {
-  //     state.loading = false;
-  //     state.error = null;
-  //     state.courses = action.payload;
-  //   });
-  //   builder.addCase(fetchCourses.pending, (state) => {
-  //     state.loading = true;
-  //     state.error = null;
-  //   });
-
-  //   builder.addCase(fetchCourses.rejected, (state, action) => {
-  //     state.loading = false;
-
-  //     state.error = action.error.message || "Failed to fetch courses";
-  //   });
-  // },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchAllCourses.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(
+        fetchAllCourses.fulfilled,
+        (state, action: PayloadAction<Course[]>) => {
+          state.isLoading = false;
+          state.courses = action.payload;
+          console.log(state.courses);
+        }
+      )
+      .addCase(fetchAllCourses.rejected, (state) => {
+        state.isLoading = false;
+        // state.error = action.error.message;
+      });
+  },
 });
 
-export const coursesReducer = coursesSlice.reducer;
-export const { getUserCourses } = coursesSlice.actions;
+export default coursesSlice.reducer;

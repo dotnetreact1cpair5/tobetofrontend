@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Dropdown } from "flowbite-react";
 import { useDispatch } from "react-redux";
 import { logout } from "../slices/authSlice";
+import { authActions } from "../slices/authhSlice";
 function Navbar() {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
@@ -71,7 +72,7 @@ function Navbar() {
                 <div className="absolute flex w-48 flex-col items-center justify-center space-y-3 rounded-md bg-[#93f] py-4 text-center text-sm font-normal text-zinc-100">
                   <button>Profil Bilgileri</button>
                   <hr className="w-full" />
-                  <button onClick={() => dispatch(logout())}>
+                  <button onClick={() => dispatch(authActions.removeToken())}>
                     Oturumu Kapat
                   </button>
                 </div>

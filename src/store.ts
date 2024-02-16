@@ -1,23 +1,23 @@
 import { configureStore } from "@reduxjs/toolkit";
+import coursesReducer from "./slices/coursesSlice";
 // import { userReducer } from "./slices/userSlice";
 import { userReducer } from "./slices/userSlice";
 // import accountSlice from "./slices/accountSlice";
 import postsReducer from "./slices/postsSlice";
-import { coursesReducer } from "./slices/coursesSlice";
 import authReducer from "./slices/authSlice";
 import assessmentsReducer from "./slices/assessmentsSlice";
 import { authhReducer } from "./slices/authhSlice";
 import { loadingReducer } from "./slices/loadingSlice";
+
 export const store = configureStore({
   reducer: {
-    // account: accountSlice,
-    posts: postsReducer,
+    authh: authhReducer,
+    user: userReducer,
     courses: coursesReducer,
+    posts: postsReducer,
     assessments: assessmentsReducer,
     auth: authReducer,
-    authh: authhReducer,
     loading: loadingReducer,
-    user: userReducer,
   },
 });
 // Infer the `RootState` and `AppDispatch` types from the store itself
