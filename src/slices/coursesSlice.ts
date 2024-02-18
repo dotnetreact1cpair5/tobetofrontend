@@ -3,28 +3,57 @@ import courseService from "../services/courseService";
 import { RootState } from "../store";
 
 export interface Course {
+  // id: number;
+  // accountId: number;
+  // userId: number;
+  // categoryName: string;
+  // organizationName: string;
+  // contentTypeId: number;
+  // contentTypeName: string;
+  // pathFileId: number;
+  // name: string;
+  // estimatedVideoDuration: string;
+  // startDate: Date;
+  // endDate: Date;
   id: number;
-  accountId: number;
   userId: number;
-  categoryName: string;
+  courseName: string;
+  contentName: string;
+  lessonName: string;
+  sessionRecord: string;
+  instructor: string;
+  categoryLesson: string;
+  categoryCourse: string;
   organizationName: string;
-  contentTypeId: number;
-  contentTypeName: string;
-  pathFileId: number;
-  name: string;
+  contentTypeCourse: string;
+  contentTypeLesson: string;
+  pathFileCourse: string;
+  pathFileLesson: string;
   estimatedVideoDuration: string;
+  lessonVideoDuration: string;
   startDate: Date;
   endDate: Date;
+  createdDate: Date;
 }
 export interface CoursesState {
+  // from?: number;
+  // index?: number;
+  // size?: number;
+  // count?: number;
+  // pages?: number;
+  // hasPrevious?: boolean;
+  // hasNext?: boolean;
+  // courses: Course[];
+  // isLoading: boolean;
+  // error: null;
   from?: number;
   index?: number;
   size?: number;
   count?: number;
   pages?: number;
+  courses: Course[];
   hasPrevious?: boolean;
   hasNext?: boolean;
-  courses: Course[];
   isLoading: boolean;
   error: null;
 }
@@ -39,14 +68,16 @@ export const fetchAllCourses = createAsyncThunk(
     return await courseService.getUserCourses(userId);
   }
 );
+// export const fetchCourseById = createAsyncThunk(
+//   "courses/fetchCoursesById",
+//   async (courseId: any) => {
+//     return await courseService.getCourseById(courseId);
+//   }
+// );
 export const coursesSlice = createSlice({
   name: "courses",
   initialState,
-  reducers: {
-    random(state) {
-      // state.courses = courseService.getAllCourses();
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllCourses.pending, (state) => {
@@ -65,6 +96,13 @@ export const coursesSlice = createSlice({
         state.isLoading = false;
         // state.error = action.error.message;
       });
+    // builder.addCase(
+    //   fetchCourseById.fulfilled,
+    //   (state, action: PayloadAction<Course[]>) => {
+    //     state.courses = action.payload;
+    //     console.log(state.courses);
+    //   }
+    // );
   },
 });
 

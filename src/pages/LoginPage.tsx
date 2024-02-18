@@ -42,7 +42,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="flex min-h-screen flex-col">
       <LoginHeader />
       <nav className="bg-black">
         <div className="flex w-full items-center justify-between p-4 text-white">
@@ -116,7 +116,7 @@ const LoginPage = () => {
           </div>
         </div>
       </main>
-      <footer className="bg-black p-10">
+      <footer className="mt-auto bg-black p-10">
         <div className="container mx-auto flex items-center justify-between text-white">
           <div>
             <img src="/assets/tobeto-logo-mini.png" className="h-7 w-32" />

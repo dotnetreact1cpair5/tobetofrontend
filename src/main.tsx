@@ -22,6 +22,7 @@ import { RootState, store } from "./store.js";
 import ProfilePage from "./pages/ProfilePage.js";
 import LoginPage from "./pages/LoginPage.js";
 import PrivateRoutes from "./utils/PrivateRoutes.js";
+import CourseDetailsPage from "./pages/CourseDetailsPage.js";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -35,6 +36,10 @@ const router = createBrowserRouter(
           <Route path="/katalog" element={<Catalogue />} />
           <Route path="/takvim" element={<Calendar />} />
           <Route path="/egitimlerim" element={<CoursesPage />} />
+          <Route
+            path=":name/:courseid/coursedetails"
+            element={<CourseDetailsPage />}
+          />
         </Route>
       </Route>
     </Route>

@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="h-[107.5px] bg-[#9933ff] py-5 text-white">
+    <footer className="bottom-0 mt-auto h-[107.5px] w-full bg-[#9933ff] py-5 text-white">
       <div className="container mx-auto flex h-[67.5px] w-[1140px] items-center justify-between">
         <div className="logo">
           <a href="#">

@@ -9,7 +9,7 @@ const CoursesPage = () => {
   // console.log(allCourses);
   const dispatch = useDispatch<AppDispatch>();
   const userId = useSelector((state: RootState) => state.user.user?.id);
-  // console.log(userId);
+  console.log(userId);
   useEffect(() => {
     dispatch(fetchAllCourses(userId));
   }, []);

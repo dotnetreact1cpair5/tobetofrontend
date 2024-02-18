@@ -5,7 +5,7 @@ interface LoginResponse {
 class TokenService {
   getToken(): any {
     const token = localStorage.getItem("token");
-    console.log(token);
+    // console.log(token);
     return token;
   }
   hasToken(): boolean {

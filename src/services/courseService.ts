@@ -1,30 +1,27 @@
 import axiosInstance from "../core/interceptors/axiosInterceptor";
 import { BaseService } from "../core/services/baseService";
 import { BASE_API_URL } from "../environment/environment";
+import { Course } from "../slices/coursesSlice";
 
 export interface GetAllCoursesResponse {
-  from: number;
-  index: number;
-  size: number;
-  count: number;
-  pages: number;
+  // from: number;
+  // index: number;
+  // size: number;
+  // count: number;
+  // pages: number;
+  // items: Course[];
+  // hasPrevious: boolean;
+  // hasNext: boolean;
+  from?: number;
+  index?: number;
+  size?: number;
+  count?: number;
+  pages?: number;
   items: Course[];
-  hasPrevious: boolean;
-  hasNext: boolean;
-}
-export interface Course {
-  id: number;
-  accountId: number;
-  userId: number;
-  categoryName: string;
-  organizationName: string;
-  contentTypeId: number;
-  contentTypeName: string;
-  pathFileId: number;
-  name: string;
-  estimatedVideoDuration: string;
-  startDate: Date;
-  endDate: Date;
+  hasPrevious?: boolean;
+  hasNext?: boolean;
+  isLoading: boolean;
+  error: null;
 }
 
 class CourseService extends BaseService<
@@ -37,7 +34,7 @@ class CourseService extends BaseService<
 > {
   constructor() {
     super();
-    this.apiUrl = BASE_API_URL + "Course";
+    this.apiUrl = BASE_API_URL + "AccountCourse";
   }
   async getAllCourses(userId: any) {
     const response = await axiosInstance.get<GetAllCoursesResponse>(
@@ -54,8 +51,17 @@ class CourseService extends BaseService<
     const response = await axiosInstance.get<GetAllCoursesResponse>(
       this.apiUrl + `/getbyuserid?userId=${userId}`
     );
+    // http://localhost:49805/api/AccountCourse
     // http://localhost:49805/api/Course/getbyuserid?userId=4
+    // http://localhost:49805/api/AccountCourse/getbyuserid?userId=3
     console.log(response);
+    return response.data.items;
+  }
+
+  async getCourseById(courseId: any) {
+    const response = await axiosInstance.get<GetAllCoursesResponse>(
+      this.apiUrl + `/getbycourseid?courseId=${courseId}`
+    );
     return response.data.items;
   }
 }
