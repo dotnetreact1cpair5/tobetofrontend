@@ -3,15 +3,15 @@ import CourseDetailsCard from "../components/courses/CourseDetailsCard";
 
 import { useLocation } from "react-router-dom";
 
-import courseService, { Course } from "../services/courseService";
-
+import courseService from "../services/courseService";
+import { Course } from "../slices/coursesSlice";
 const CourseDetailsPage = () => {
   const location = useLocation();
   console.log(location.pathname);
   const parts = location.pathname.split("/");
   const courseId = Number(parts[2]);
-
-  const [course, setCourse] = useState<Course[] | null>(null);
+  console.log(courseId);
+  const [course, setCourse] = useState<Course | null>(null);
 
   const fetchCourseById = async () => {
     setCourse(await courseService.getCourseById(courseId));

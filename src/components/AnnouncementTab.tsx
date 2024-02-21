@@ -10,7 +10,7 @@ function AnnouncementTab() {
         <div className="flex items-center justify-between text-zinc-400">
           <div className="">
             <span className="flex items-center justify-center gap-x-1">
-              <img src="/date.svg" />
+              <img src="/assets/date.svg" />
               <span>06.01.2024</span>
             </span>
           </div>

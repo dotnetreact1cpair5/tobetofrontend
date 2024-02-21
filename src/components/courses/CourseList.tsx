@@ -14,7 +14,9 @@ const CourseList = ({ list }: CourseListProps) => {
       </div>
       <div className="container mx-auto grid max-w-6xl grid-cols-3 place-items-center gap-8 p-8">
         {list ? (
-          list.map((course) => <CourseCard course={course} key={course.id} />)
+          list.map((course) => (
+            <CourseCard course={course} key={course.courseId} />
+          ))
         ) : (
           <Loading />
         )}

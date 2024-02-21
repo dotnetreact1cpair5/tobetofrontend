@@ -1,13 +1,20 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import tbtLogo from "/assets/tbtlogo.svg";
 import { useState } from "react";
 import { Dropdown } from "flowbite-react";
-import { useDispatch } from "react-redux";
-import { logout } from "../slices/authSlice";
-import { authActions } from "../slices/authhSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import { authActions } from "../slices/authSlice";
+import { RootState } from "../store";
 function Navbar() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    dispatch(authActions.removeToken());
+    navigate("/login");
+  };
   const [isOpen, setIsOpen] = useState(false);
+  const username = useSelector((state: RootState) => state.user.user?.username);
   return (
     <header className="font-normal">
       <nav>
@@ -50,7 +57,7 @@ function Navbar() {
                   alt=""
                   className="w-10 rounded-full"
                 />
-                <span>Efe Tekce</span>
+                <span>{username}</span>
                 <span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -72,9 +79,7 @@ function Navbar() {
                 <div className="absolute flex w-48 flex-col items-center justify-center space-y-3 rounded-md bg-[#93f] py-4 text-center text-sm font-normal text-zinc-100">
                   <button>Profil Bilgileri</button>
                   <hr className="w-full" />
-                  <button onClick={() => dispatch(authActions.removeToken())}>
-                    Oturumu Kapat
-                  </button>
+                  <button onClick={handleLogout}>Oturumu Kapat</button>
                 </div>
               )}
             </div>

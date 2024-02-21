@@ -5,6 +5,7 @@ import { useEffect } from "react";
 // import videoService from "../services/videoService";
 import authService from "../services/authService";
 
+import { userSlice } from "../slices/userSlice";
 const HomePage = () => {
   const userId = useSelector((state: RootState) => {
     return state.user.user?.id;

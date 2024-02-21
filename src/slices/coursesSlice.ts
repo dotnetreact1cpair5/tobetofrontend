@@ -15,7 +15,7 @@ export interface Course {
   // estimatedVideoDuration: string;
   // startDate: Date;
   // endDate: Date;
-  id: number;
+  courseId: number;
   userId: number;
   courseName: string;
   contentName: string;

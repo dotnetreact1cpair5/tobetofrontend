@@ -13,7 +13,7 @@ function Panel() {
   const handleCourses = async () => {
     setActiveTabIndex(2);
     const response = await fetch(
-      "http://localhost:49805/api/Course?PageIndex=0&PageSize=4"
+      "http://localhost:49805/api/AccountCourse?PageIndex=0&PageSize=4"
     );
 
     const { items } = await response.json();
@@ -29,6 +29,7 @@ function Panel() {
             alt=""
             className="h-[160px] w-[300px]"
           />
+
           <div className="mt-5 space-y-5 text-center">
             <h3 className="text-2xl">
               Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al.

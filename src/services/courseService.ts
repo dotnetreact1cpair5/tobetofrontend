@@ -62,7 +62,8 @@ class CourseService extends BaseService<
     const response = await axiosInstance.get<GetAllCoursesResponse>(
       this.apiUrl + `/getbycourseid?courseId=${courseId}`
     );
-    return response.data.items;
+    console.log(response.data);
+    return response.data.items[0];
   }
 }
 

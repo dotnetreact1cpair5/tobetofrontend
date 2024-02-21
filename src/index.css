@@ -54,8 +54,12 @@ div.card > h1 {
   @apply text-2xl;
 }
 
-li > a {
-  @apply focus:font-semibold focus:text-violet-700;
+ul > li > a :hover {
+  @apply scale-150;
+}
+
+li > a.active {
+  @apply font-bold text-violet-700 underline decoration-violet-600 decoration-solid decoration-2 underline-offset-8;
 }
 
 .card {

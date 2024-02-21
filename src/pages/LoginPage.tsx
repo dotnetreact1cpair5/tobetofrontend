@@ -4,13 +4,14 @@ import { RootState } from "../store";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import LoginHeader from "../components/LoginHeader";
-import { loginAsync } from "../slices/authSlice";
+
 import authService from "../services/authService";
-import { authActions } from "../slices/authhSlice";
+import { authActions } from "../slices/authSlice";
 import { userActions } from "../slices/userSlice";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { OverlayLoader } from "../components/helpers/OverlayLoader/OverlayLoader";
+import { Slide, ToastContainer, toast } from "react-toastify";
 
 type FormFields = {
   email: string;
@@ -22,10 +23,14 @@ const LoginPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
-    (state: RootState) => state.authh.isAuthenticated
+    (state: RootState) => state.auth.isAuthenticated
   );
   console.log(isAuthenticated);
+  const notify = () => toast.success("Giriş başarılı.");
 
+  const isLoggedIn = useSelector(
+    (state: RootState) => state.auth.isAuthenticated
+  );
   // const loading = useSelector((state: RootState) => state.loading.requestCount);
   const handleLogin: SubmitHandler<FormFields> = (data: any) => {
     console.log("submitted");
@@ -36,22 +41,34 @@ const LoginPage = () => {
       if (response.data?.token) {
         dispatch(authActions.addToken({ token: response.data.token }));
         dispatch(userActions.getUser());
-        navigate("/");
+
+        setTimeout(() => notify(), 500);
+        setTimeout(() => navigate("/"), 3000);
       }
     });
   };
 
   return (
     <div className="flex min-h-screen flex-col">
+      <ToastContainer
+        position="bottom-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Slide}
+      />
       <LoginHeader />
       <nav className="bg-black">
         <div className="flex w-full items-center justify-between p-4 text-white">
           <img src="/assets/tobetologobeyaz.png" className="w-40" />
           <ul className="flex justify-around space-x-8 p-2">
-            <li>
-              Biz Kimiz?
-              {isAuthenticated}
-            </li>
+            <li>Biz Kimiz?</li>
             <li>Neler Sunuyoruz?</li>
             <li>Katalog</li>
             <li>Codecademy</li>

@@ -22,7 +22,7 @@ const CourseCard = ({ course }: CardProps) => {
         onClick={() =>
           navigate(
             `/${course.courseName.replace(/\s+/g, "")}/${
-              course.id
+              course.courseId
             }/coursedetails`
           )
         }
