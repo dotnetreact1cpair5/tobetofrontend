@@ -5,7 +5,7 @@ import CoursesTab from "./courses/CoursesTab";
 import AnnouncementTab from "./AnnouncementTab";
 import SurveyTab from "./SurveyTab";
 import { Course } from "../slices/coursesSlice";
-
+import { motion } from "framer-motion";
 function Panel() {
   const [activeTabIndex, setActiveTabIndex] = useState(1);
 
@@ -24,12 +24,16 @@ function Panel() {
     <section>
       <div className="container mx-auto max-w-6xl rounded-xl shadow-2xl">
         <div className="logoplatform flex flex-col items-center p-4">
-          <img
-            src="/assets/iklogo.svg"
-            alt=""
-            className="h-[160px] w-[300px]"
-          />
-
+          <motion.div
+            animate={{ opacity: [1, 0.2, 1] }}
+            transition={{ duration: 3, repeat: Infinity }}
+          >
+            <img
+              src="/assets/iklogo.svg"
+              alt=""
+              className="h-[160px] w-[300px]"
+            />
+          </motion.div>
           <div className="mt-5 space-y-5 text-center">
             <h3 className="text-2xl">
               Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al.

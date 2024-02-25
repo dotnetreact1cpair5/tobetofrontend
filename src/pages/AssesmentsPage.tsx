@@ -3,7 +3,7 @@ import AssessmentCard from "../components/assessments/AssessmentCard";
 import AssessmentList from "../components/assessments/AssessmentList";
 import GenericButton from "../components/helpers/GenericButton";
 import Modal from "../components/helpers/Modal";
-
+import { AnimatePresence, motion } from "framer-motion";
 function AssessmentsPage() {
   const [assessments, setAssessments] = useState([]);
 
@@ -18,9 +18,25 @@ function AssessmentsPage() {
     };
     fetchAssessments();
   }, []);
+  const transition = {
+    duration: 1.5,
+  };
+
+  const slideTransition = {
+    initial: { x: "100%" },
+    animate: { x: 0 },
+    exit: { x: "-100%" },
+  };
+
   return (
-    <>
-      <main className="container mx-auto my-10 max-w-6xl space-y-10">
+    <motion.div
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={slideTransition}
+      transition={transition}
+    >
+      <main className="container mx-auto my-10 max-w-6xl space-y-10 p-4">
         <h2 className="text-center text-4xl font-normal">
           <span className="text-[#9933ff]">Yetkinlik</span>lerini ücretsiz ölç,{" "}
           <span className="text-[#9933ff]">bilgi</span>lerini test et.
@@ -80,7 +96,7 @@ function AssessmentsPage() {
           </section>
         </section>
       </main>
-    </>
+    </motion.div>
   );
 }
 export default AssessmentsPage;

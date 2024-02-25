@@ -1,21 +1,23 @@
-import { FC, ReactNode } from "react";
+import { ButtonHTMLAttributes, FC, ReactNode } from "react";
 
-interface GenericButtonProps {
+interface GenericButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   onClick?: () => void;
   children?: ReactNode;
-  color?: string;
-  border?: string;
+  className?: string;
 }
 
-const GenericButton = ({ children, color = "violet" }: GenericButtonProps) => {
+const GenericButton = ({
+  children,
+  className,
+  ...rest
+}: GenericButtonProps) => {
   return (
-    // <Button
-    //   pill
-    // className={`rounded-full bg-${color}-400 px-4 py-2 font-semibold`}
-    // >
-    //   {children}
-    // </Button>
-    <div></div>
+    <button
+      className={`${className} rounded-full px-4 py-2 font-semibold`}
+      {...rest}
+    >
+      {children}
+    </button>
   );
 };
 export default GenericButton;

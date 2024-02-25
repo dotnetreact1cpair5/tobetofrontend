@@ -4,7 +4,7 @@ import { RootState } from "../store";
 import { useEffect } from "react";
 // import videoService from "../services/videoService";
 import authService from "../services/authService";
-
+import { AnimatePresence, motion } from "framer-motion";
 import { userSlice } from "../slices/userSlice";
 const HomePage = () => {
   const userId = useSelector((state: RootState) => {
@@ -32,10 +32,13 @@ const HomePage = () => {
   // }, []);
 
   return (
-    <>
-      id'yi burada gosterecek: {userId}
+    <motion.div
+      transition={{ duration: 2 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+    >
       <App />
-    </>
+    </motion.div>
   );
 };
 export default HomePage;

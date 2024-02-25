@@ -11,6 +11,7 @@ import { ForeignLanguage } from "../models/foreignLanguageModel";
 import { SocialMedia } from "../models/socialMediaModel";
 import { Skill } from "../models/skillModel";
 import { Certificate } from "../models/certificateModel";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ProfilePage = () => {
   const [accountData, setAccountData] = useState<Account | null>(null);
@@ -50,34 +51,53 @@ const ProfilePage = () => {
 
     fetchData();
   }, []);
+  const transition = {
+    duration: 1.5,
+  };
+
+  const slideTransition = {
+    initial: { x: "100%" },
+    animate: { x: 0 },
+    exit: { x: "-100%" },
+  };
 
   return (
-    <main className="container mx-auto grid max-w-6xl grid-cols-3 space-x-8 p-4">
-      <div className="col-span-1 w-full space-y-8">
-        {loading && <div>Loading...</div>}
-        {fetchError && <div>Error: {fetchError}</div>}
-        <ProfileDataCard data={accountData} />
-        <ProfileCard title="Hakkımda" data={languageData} />
-        <ProfileCard title="Yetkinliklerim" data={skillData} />
-        <ProfileCard title="Yabancı Dillerim" data={languageData} />
-        <ProfileCard title="Sertifikalarım" data={certificateData} />
-        <ProfileCard title="Medya Hesaplarım" data={socialMediaData} />
-      </div>
-      <div className="col-span-2 w-full space-y-8">
-        <ProfileCard title="Tobeto İşte Başarı Modelim" chart={true} />
-        <ProfileCard title="Tobeto Seviye Testlerim" data={languageData} />
-        <ProfileCard
-          title="Yetkinlik Rozetlerim"
-          data={languageData}
-          badges={["a", "b", "c"]}
-        />
-        <ProfileCard title="Aktivite Haritam" activity={true} />
-        <ProfileCard
-          title="Eğitim Hayatım ve Deneyimlerim"
-          data={languageData}
-        />
-      </div>
-    </main>
+    <AnimatePresence>
+      <motion.div
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={slideTransition}
+        transition={transition}
+      >
+        <main className="container mx-auto grid max-w-6xl grid-cols-3 space-x-8 p-8">
+          <div className="col-span-1 w-full space-y-8">
+            {loading && <div>Loading...</div>}
+            {fetchError && <div>Error: {fetchError}</div>}
+            <ProfileDataCard data={accountData} />
+            <ProfileCard title="Hakkımda" data={languageData} />
+            <ProfileCard title="Yetkinliklerim" data={skillData} />
+            <ProfileCard title="Yabancı Dillerim" data={languageData} />
+            <ProfileCard title="Sertifikalarım" data={certificateData} />
+            <ProfileCard title="Medya Hesaplarım" data={socialMediaData} />
+          </div>
+          <div className="col-span-2 w-full space-y-8">
+            <ProfileCard title="Tobeto İşte Başarı Modelim" chart={true} />
+            <ProfileCard title="Tobeto Seviye Testlerim" data={languageData} />
+            <ProfileCard
+              title="Yetkinlik Rozetlerim"
+              data={languageData}
+              badges={["a", "b", "c"]}
+            />
+            <ProfileCard title="Aktivite Haritam" activity={true} />
+            <ProfileCard
+              title="Eğitim Hayatım ve Deneyimlerim"
+              data={languageData}
+            />
+          </div>
+        </main>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

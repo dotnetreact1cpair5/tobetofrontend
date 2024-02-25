@@ -15,8 +15,12 @@ function Navbar() {
   };
   const [isOpen, setIsOpen] = useState(false);
   const username = useSelector((state: RootState) => state.user.user?.username);
+  const handleProfileNavigation = () => {
+    navigate("/profilimi-duzenle/kisisel-bilgilerim");
+    setIsOpen(false);
+  };
   return (
-    <header className="font-normal">
+    <header className="text-lg font-normal">
       <nav>
         <div className="flex h-[93px] items-center justify-between border-b-[1px] border-[#f8f3fb] p-4">
           <a href="">
@@ -39,7 +43,12 @@ function Navbar() {
               <NavLink to="/takvim">Takvim</NavLink>
             </li>
             <li>
-              <NavLink to="/">İstanbul Kodluyor</NavLink>
+              <NavLink
+                to="https://tobeto.com/istanbul-kodluyor"
+                target="_blank"
+              >
+                İstanbul Kodluyor
+              </NavLink>
             </li>
           </ul>
           <div className="right flex items-center space-x-2">
@@ -76,8 +85,10 @@ function Navbar() {
                 </span>
               </button>
               {isOpen && (
-                <div className="absolute flex w-48 flex-col items-center justify-center space-y-3 rounded-md bg-[#93f] py-4 text-center text-sm font-normal text-zinc-100">
-                  <button>Profil Bilgileri</button>
+                <div className="absolute z-10 flex w-48 flex-col items-center justify-center space-y-3 rounded-md bg-[#93f] py-4 text-center text-sm font-normal text-zinc-100">
+                  <button onClick={handleProfileNavigation}>
+                    Profil Bilgileri
+                  </button>
                   <hr className="w-full" />
                   <button onClick={handleLogout}>Oturumu Kapat</button>
                 </div>

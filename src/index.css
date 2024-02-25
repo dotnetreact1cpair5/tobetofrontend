@@ -20,6 +20,7 @@
     #47cf73
   );
   background-size: 200px;
+  height: auto;
 }
 
 @keyframes rainbow {
@@ -54,9 +55,9 @@ div.card > h1 {
   @apply text-2xl;
 }
 
-ul > li > a :hover {
+/* ul > li > a :hover {
   @apply scale-150;
-}
+} */
 
 li > a.active {
   @apply font-bold text-violet-700 underline decoration-violet-600 decoration-solid decoration-2 underline-offset-8;
@@ -68,4 +69,18 @@ li > a.active {
 
 .card > h1 {
   @apply pt-12 text-4xl;
+}
+
+.profile-list > li {
+  @apply flex space-x-4 p-2 font-body text-lg text-zinc-500;
+}
+.profile-list > li > a.active {
+  @apply w-4/5 border-r-4 border-r-violet-700 font-medium no-underline transition-all duration-500;
+}
+
+.form > .input-container > div {
+  @apply flex w-full flex-col space-y-2 font-semibold text-zinc-500;
+}
+.form > .input-container > div > input {
+  @apply appearance-none rounded-xl transition duration-300 focus:border-0 focus:ring-4 focus:ring-purple-400;
 }

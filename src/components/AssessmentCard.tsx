@@ -19,7 +19,7 @@ const AssessmentCard = ({ children, toggleModal, assessment }: any) => {
       </span>
       {children}
       abc
-      <GenericButton>Başla</GenericButton>
+      <GenericButton className="bg-green-500 text-4xl">Başla</GenericButton>
       {showModal && (
         <Modal assessment={assessment} setShowModal={setShowModal} />
       )}
