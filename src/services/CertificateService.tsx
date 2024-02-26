@@ -1,11 +1,13 @@
 import axios from "axios";
 import { Certificate } from "../models/certificateModel";
+import { BASE_API_URL } from "../environment/environment";
 
 class CertificateService {
   static async getCertificateData(): Promise<Certificate | null> {
     try {
       const response = await axios.get<any>(
-        "http://localhost:5045/api/AccountCertificate?PageIndex=0&PageSize=15"
+        // "http://localhost:5045/api/AccountCertificates?PageIndex=0&PageSize=10"
+        BASE_API_URL + "AccountCertificates?PageIndex=0&PageSize=10"
       );
       const CertificateData = response.data?.items[0];
       if (CertificateData) {

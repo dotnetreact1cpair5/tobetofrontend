@@ -1,6 +1,15 @@
 import GenericButton from "../helpers/GenericButton";
 
 const EditUserInfo = () => {
+  const transition = {
+    duration: 1,
+  };
+
+  const slideTransition = {
+    initial: { y: "100%" },
+    animate: { y: 0 },
+    exit: { y: "-100%" },
+  };
   return (
     <form className="form flex flex-col">
       <div className="flex flex-col items-center justify-center">

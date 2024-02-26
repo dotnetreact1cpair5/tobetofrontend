@@ -12,22 +12,34 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { OverlayLoader } from "../components/helpers/OverlayLoader/OverlayLoader";
 import { Slide, ToastContainer, toast } from "react-toastify";
+import GenericButton from "../components/helpers/GenericButton";
 
-type FormFields = {
+interface LoginFields {
   email: string;
   password: string;
-  name: string;
-  lastName: string;
-};
+}
 
+interface RegisterFields extends LoginFields {
+  firstName: string;
+  lastName: string;
+}
 const LoginPage = () => {
-  const { register, handleSubmit } = useForm<FormFields>();
+  const {
+    register: loginRegister,
+    handleSubmit: handleLoginSubmit,
+    formState: { errors: LoginErrors },
+  } = useForm<LoginFields>();
+  const {
+    register: registerRegister,
+    handleSubmit: handleRegisterSubmit,
+    formState: { errors: RegisterErrors },
+  } = useForm<RegisterFields>();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isAuthenticated = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
-  console.log(isAuthenticated);
+  console.log("isAuthenticated:", isAuthenticated);
   const notify = () => toast.success("Giriş başarılı.");
 
   const isLoggedIn = useSelector(
@@ -36,7 +48,7 @@ const LoginPage = () => {
 
   const [isOpen, setOpen] = useState(false);
   // const loading = useSelector((state: RootState) => state.loading.requestCount);
-  const handleLogin: SubmitHandler<FormFields> = (data: any) => {
+  const handleLogin: SubmitHandler<LoginFields> = (data: LoginFields) => {
     console.log("submitted");
     console.log(data);
 
@@ -48,6 +60,23 @@ const LoginPage = () => {
 
         setTimeout(() => notify(), 500);
         setTimeout(() => navigate("/"), 3000);
+      }
+    });
+  };
+
+  const handleRegister: SubmitHandler<RegisterFields> = (
+    data: RegisterFields
+  ) => {
+    console.log("registered");
+    console.log(data);
+    authService.register(data).then((response) => {
+      console.log(response);
+      notify();
+      if (response.data?.token) {
+        // dispatch(authActions.addToken({ token: response.data.token }));
+        // dispatch(userActions.getUser());
+        // setTimeout(() => notify(), 500);
+        // setTimeout(() => navigate("/"), 3000);
       }
     });
   };
@@ -100,27 +129,43 @@ const LoginPage = () => {
               <div className="login-card flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
                 <img src="/assets/tobetocolored.png" className="h-auto w-60" />
                 <form
-                  onSubmit={handleSubmit(handleLogin)}
-                  className="flex w-full flex-col items-center justify-center space-y-6"
+                  onSubmit={handleLoginSubmit(handleLogin)}
+                  className="flex w-full flex-col items-center justify-center gap-y-6"
                 >
                   <input
-                    {...register("email", {
+                    {...loginRegister("email", {
                       required: "Bu alanin doldurulmasi zorunludur.",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Geçersiz e-posta adresi*",
+                      },
                     })}
                     type="text"
                     placeholder="E-mail adresiniz"
                     className="h-12 w-full rounded-xl bg-slate-200 p-4"
                   />
+
+                  {LoginErrors.email && (
+                    <span className="-mt-5 font-medium text-red-600">
+                      {LoginErrors.email.message}
+                    </span>
+                  )}
                   <input
-                    {...register("password", {
+                    {...loginRegister("password", {
                       required: "Bu alanin doldurulmasi zorunludur.",
                     })}
-                    type="text"
+                    type="password"
                     placeholder="Şifreniz"
                     className="h-12 w-full rounded-xl bg-slate-200 p-4"
                   />
-
-                  <StyledButton size="large">Giriş Yap</StyledButton>
+                  {LoginErrors.password && (
+                    <span className="-mt-5 font-medium text-red-600">
+                      {LoginErrors.password.message}
+                    </span>
+                  )}
+                  <GenericButton className="bg-[#9933ff] text-white">
+                    Giriş Yap
+                  </GenericButton>
 
                   <button>Şifremi Unuttum</button>
                 </form>
@@ -138,45 +183,88 @@ const LoginPage = () => {
             {isOpen && (
               <div className="register-card flex h-auto w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
                 <img src="/assets/tobetocolored.png" className="h-auto w-60" />
-                <h2 className="text-4xl font-bold">Hemen Kayit Ol</h2>
+                <h2 className="text-4xl font-bold">Hemen Kayıt Ol</h2>
                 <form
-                  onSubmit={handleSubmit(handleLogin)}
-                  className="flex w-full flex-col items-center justify-center space-y-6"
+                  onSubmit={handleRegisterSubmit(handleRegister)}
+                  className="flex w-full flex-col items-center justify-center gap-y-6"
                 >
                   <input
-                    {...register("name", {
+                    {...registerRegister("firstName", {
                       required: "Bu alanin doldurulmasi zorunludur.",
+                      minLength: {
+                        value: 2,
+                        message:
+                          "First name must be at least 2 characters long",
+                      },
                     })}
                     type="text"
-                    placeholder="Adini soyle bana"
+                    placeholder="Ad"
                     className="h-12 w-full rounded-xl bg-slate-200 p-4"
                   />
+                  {RegisterErrors.firstName && (
+                    <span className="-mt-5 font-medium text-red-600">
+                      {RegisterErrors.firstName.message}
+                    </span>
+                  )}
                   <input
-                    {...register("lastName", {
+                    {...registerRegister("lastName", {
                       required: "Bu alanin doldurulmasi zorunludur.",
+                      minLength: {
+                        value: 2,
+                        message:
+                          "First name must be at least 2 characters long",
+                      },
                     })}
                     type="text"
                     placeholder="Soyad"
                     className="h-12 w-full rounded-xl bg-slate-200 p-4"
                   />
+                  {RegisterErrors.lastName && (
+                    <span className="-mt-5 font-medium text-red-600">
+                      {RegisterErrors.lastName.message}
+                    </span>
+                  )}
                   <input
-                    {...register("email", {
+                    {...registerRegister("email", {
                       required: "Bu alanin doldurulmasi zorunludur.",
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: "Geçersiz e-posta adresi*",
+                      },
                     })}
                     type="text"
                     placeholder="E-mail adresiniz"
                     className="h-12 w-full rounded-xl bg-slate-200 p-4"
                   />
+                  {RegisterErrors.email && (
+                    <span className="-mt-5 font-medium text-red-600">
+                      {RegisterErrors.email.message}
+                    </span>
+                  )}
                   <input
-                    {...register("password", {
+                    {...registerRegister("password", {
                       required: "Bu alanin doldurulmasi zorunludur.",
+                      minLength: {
+                        value: 8,
+                        message: "Password must be at least 8 characters long",
+                      },
+                      pattern: {
+                        value:
+                          /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/,
+                        message:
+                          "Password must contain at least one uppercase letter and one symbol",
+                      },
                     })}
                     type="password"
                     placeholder="Şifreniz"
                     className="h-12 w-full rounded-xl bg-slate-200 p-4"
                   />
-
-                  <StyledButton size="large">Giriş Yap</StyledButton>
+                  {RegisterErrors.password && (
+                    <span className="-mt-5 font-medium text-red-600">
+                      {RegisterErrors.password.message}
+                    </span>
+                  )}
+                  <StyledButton size="large">Kayıt ol</StyledButton>
 
                   <button>Şifremi Unuttum</button>
                 </form>
@@ -192,7 +280,11 @@ const LoginPage = () => {
               </div>
             )}
           </div>
-          <div className="rainbow-card flex min-h-[450px] w-3/4 justify-self-start p-2">
+          <div
+            className={`rainbow-card flex ${
+              isOpen ? "min-h-[665px]" : "min-h-[450px]"
+            } w-3/4 justify-self-start p-2`}
+          >
             <div className="flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
               <img src="/assets/iklogo.svg" className="h-auto w-60" />
               <span className="w-1/3 border-b-2 border-b-[#00b078]"></span>

@@ -20,7 +20,7 @@ function Navbar() {
     setIsOpen(false);
   };
   return (
-    <header className="text-lg font-normal">
+    <header className="text-md font-medium">
       <nav>
         <div className="flex h-[93px] items-center justify-between border-b-[1px] border-[#f8f3fb] p-4">
           <a href="">

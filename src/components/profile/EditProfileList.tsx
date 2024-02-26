@@ -1,6 +1,15 @@
 import { NavLink } from "react-router-dom";
 
 const EditProfileList = () => {
+  const transition = {
+    duration: 1,
+  };
+
+  const slideTransition = {
+    initial: { y: "100%" },
+    animate: { y: 0 },
+    exit: { y: "-100%" },
+  };
   return (
     <ul className="profile-list text-xl">
       <li>

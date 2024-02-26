@@ -1,4 +1,4 @@
-import StyledButton from "../components/helpers/StyledButton";
+import GenericButton from "./helpers/GenericButton";
 const LoginHeader = () => {
   return (
     <header>
@@ -9,9 +9,10 @@ const LoginHeader = () => {
             Aradığın <span className="text-[#00b078]">"</span>İş
             <span className="text-[#00b078]">"</span> Burada!
           </h3>
-          <StyledButton color="green" size="medium">
+
+          <GenericButton className="bg-green-400 px-2 text-white">
             Başvur
-          </StyledButton>
+          </GenericButton>
         </div>
       </div>
     </header>
