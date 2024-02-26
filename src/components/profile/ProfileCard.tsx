@@ -3,6 +3,7 @@ import ReactCalendarHeatmap from "react-calendar-heatmap";
 import { Chart } from "chart.js/auto";
 import "react-calendar-heatmap/dist/styles.css";
 import { ForeignLanguage } from "../../models/foreignLanguageModel";
+import { Account } from "../../models/accountModel";
 
 interface DataItem {
   label: string;
@@ -10,7 +11,7 @@ interface DataItem {
 }
 
 interface ProfileCardProps {
-  data?: ForeignLanguage | null;
+  data?: any;
   title: string;
   content?: string;
   badges?: string[];
@@ -18,6 +19,7 @@ interface ProfileCardProps {
   chart?: boolean;
   chartData?: DataItem[];
 }
+
 
 const sourceData: DataItem[] = [
   { label: "Yeni dünyaya hazırlanıyorum", value: 65 },
@@ -76,7 +78,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     <div className="flex flex-col items-center rounded-2xl p-4 shadow-2xl">
       <h3 className="text-lg font-bold">{title}</h3>
       <hr className="h-1 w-full border-t-2" />
-      {data && <span>{data.name}</span>}
+      {data && <span>{(data as Account).description}</span>}
+      {data && <span>{(data).name}</span>}
       {badges &&
         badges.map((badge, index) => (
           <div className="badge" key={index}>

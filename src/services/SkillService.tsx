@@ -5,7 +5,7 @@ class SkillService {
   static async getSkillData(): Promise<Skill | null> {
     try {
       const response = await axios.get<any>(
-        "http://localhost:5045/api/Skills?PageIndex=0&PageSize=10"
+        "http://localhost:5045/api/Skills?PageIndex=0&PageSize=40"
       );
       const skillData = response.data?.items[0];
       if (skillData) {

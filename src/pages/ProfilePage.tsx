@@ -57,7 +57,7 @@ const ProfilePage = () => {
         {loading && <div>Loading...</div>}
         {fetchError && <div>Error: {fetchError}</div>}
         <ProfileDataCard data={accountData} />
-        <ProfileCard title="Hakkımda" data={languageData} />
+        <ProfileCard title="Hakkımda" data={accountData} />
         <ProfileCard title="Yetkinliklerim" data={skillData} />
         <ProfileCard title="Yabancı Dillerim" data={languageData} />
         <ProfileCard title="Sertifikalarım" data={certificateData} />

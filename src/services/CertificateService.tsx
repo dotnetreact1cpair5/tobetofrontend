@@ -5,7 +5,7 @@ class CertificateService {
   static async getCertificateData(): Promise<Certificate | null> {
     try {
       const response = await axios.get<any>(
-        "http://localhost:5045/api/AccountCertificates?PageIndex=0&PageSize=10"
+        "http://localhost:5045/api/AccountCertificate?PageIndex=0&PageSize=15"
       );
       const CertificateData = response.data?.items[0];
       if (CertificateData) {
