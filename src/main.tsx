@@ -21,6 +21,17 @@ import CourseDetailsPage from "./pages/CourseDetailsPage.js";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store.js";
 import { PersistGate } from "redux-persist/lib/integration/react";
+import EditProfileLayout from "./layouts/EditProfileLayout";
+import EditExperiences from "./components/profile/EditExperiences";
+
+import EditAcademicInfo from "./components/profile/EditAcademicInfo";
+import EditCertificates from "./components/profile/EditCertificates";
+import EditSkills from "./components/profile/EditSkills";
+import EditForeignLanguages from "./components/profile/EditForeignLanguages";
+import EditSocialMedia from "./components/profile/EditSocialMedia";
+import EditUserInfo from "./components/profile/EditUserInfo";
+import NotFound from "./pages/NotFound";
+import { AnimatePresence, motion } from "framer-motion";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +48,17 @@ const router = createBrowserRouter(
             path=":name/:courseid/coursedetails"
             element={<CourseDetailsPage />}
           />
+          <Route path="/profilimi-duzenle" element={<EditProfileLayout />}>
+            <Route index path="kisisel-bilgilerim" element={<EditUserInfo />} />
+            <Route path="deneyimlerim" element={<EditExperiences />} />
+            <Route path="egitim-hayatim" element={<EditAcademicInfo />} />
+            <Route path="yetkinliklerim" element={<EditSkills />} />
+            <Route path="sertifikalarim" element={<EditCertificates />} />
+            <Route path="medya-hesaplarim" element={<EditSocialMedia />} />
+            <Route path="yabanci-dil" element={<EditForeignLanguages />} />
+            {/* <Route path="ayarlar" element={<EditAcademicInfo />} /> */}
+          </Route>
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Route>
 

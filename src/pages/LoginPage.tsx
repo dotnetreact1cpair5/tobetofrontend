@@ -2,20 +2,22 @@ import { useDispatch, useSelector } from "react-redux";
 import StyledButton from "../components/helpers/StyledButton";
 import { RootState } from "../store";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+
 import LoginHeader from "../components/LoginHeader";
 
 import authService from "../services/authService";
 import { authActions } from "../slices/authSlice";
 import { userActions } from "../slices/userSlice";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { OverlayLoader } from "../components/helpers/OverlayLoader/OverlayLoader";
 import { Slide, ToastContainer, toast } from "react-toastify";
 
 type FormFields = {
   email: string;
   password: string;
+  name: string;
+  lastName: string;
 };
 
 const LoginPage = () => {
@@ -31,6 +33,8 @@ const LoginPage = () => {
   const isLoggedIn = useSelector(
     (state: RootState) => state.auth.isAuthenticated
   );
+
+  const [isOpen, setOpen] = useState(false);
   // const loading = useSelector((state: RootState) => state.loading.requestCount);
   const handleLogin: SubmitHandler<FormFields> = (data: any) => {
     console.log("submitted");
@@ -75,52 +79,120 @@ const LoginPage = () => {
             <li>Tobeto'da Bu Ay</li>
           </ul>
           <div className="flex justify-between space-x-7">
-            <StyledButton color="black" border>
+            <StyledButton color="black" border onClick={() => setOpen(false)}>
               Giriş Yap
             </StyledButton>
-            <StyledButton color="black" rainbow border>
+            <StyledButton
+              color="black"
+              rainbow
+              border
+              onClick={() => setOpen(true)}
+            >
               Ücretsiz Üye Ol
             </StyledButton>
           </div>
         </div>
       </nav>
-      <main className="grid min-h-[640px]">
+      <main className="grid min-h-[640px] p-12">
         <div className="container mx-auto grid w-3/4 grid-cols-2 place-items-center space-x-12">
-          <div className="rainbow-card flex h-[425px] w-3/4 justify-self-end p-2">
-            <div className="flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
-              <img src="/assets/tobetocolored.png" className="h-auto w-60" />
-              <form
-                onSubmit={handleSubmit(handleLogin)}
-                className="flex w-full flex-col items-center justify-center space-y-6"
-              >
-                <input
-                  {...register("email", {
-                    required: "Bu alanin doldurulmasi zorunludur.",
-                  })}
-                  type="text"
-                  placeholder="E-mail adresiniz"
-                  className="h-12 w-full rounded-xl bg-slate-200 p-4"
-                />
-                <input
-                  {...register("password", {
-                    required: "Bu alanin doldurulmasi zorunludur.",
-                  })}
-                  type="text"
-                  placeholder="Şifreniz"
-                  className="h-12 w-full rounded-xl bg-slate-200 p-4"
-                />
+          <div className="rainbow-card flex w-3/4 justify-self-end p-2">
+            {!isOpen && (
+              <div className="login-card flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
+                <img src="/assets/tobetocolored.png" className="h-auto w-60" />
+                <form
+                  onSubmit={handleSubmit(handleLogin)}
+                  className="flex w-full flex-col items-center justify-center space-y-6"
+                >
+                  <input
+                    {...register("email", {
+                      required: "Bu alanin doldurulmasi zorunludur.",
+                    })}
+                    type="text"
+                    placeholder="E-mail adresiniz"
+                    className="h-12 w-full rounded-xl bg-slate-200 p-4"
+                  />
+                  <input
+                    {...register("password", {
+                      required: "Bu alanin doldurulmasi zorunludur.",
+                    })}
+                    type="text"
+                    placeholder="Şifreniz"
+                    className="h-12 w-full rounded-xl bg-slate-200 p-4"
+                  />
 
-                <StyledButton size="large">Giriş Yap</StyledButton>
+                  <StyledButton size="large">Giriş Yap</StyledButton>
 
-                <button>Şifremi Unuttum</button>
-              </form>
-              <p>
-                Henüz üye değil misin?
-                <span className="font-semibold">Kayıt Ol</span>
-              </p>
-            </div>
+                  <button>Şifremi Unuttum</button>
+                </form>
+                <p>
+                  Henüz üye değil misin?{" "}
+                  <button
+                    className="font-semibold"
+                    onClick={() => setOpen(!isOpen)}
+                  >
+                    Kayıt Ol
+                  </button>
+                </p>
+              </div>
+            )}
+            {isOpen && (
+              <div className="register-card flex h-auto w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
+                <img src="/assets/tobetocolored.png" className="h-auto w-60" />
+                <h2 className="text-4xl font-bold">Hemen Kayit Ol</h2>
+                <form
+                  onSubmit={handleSubmit(handleLogin)}
+                  className="flex w-full flex-col items-center justify-center space-y-6"
+                >
+                  <input
+                    {...register("name", {
+                      required: "Bu alanin doldurulmasi zorunludur.",
+                    })}
+                    type="text"
+                    placeholder="Adini soyle bana"
+                    className="h-12 w-full rounded-xl bg-slate-200 p-4"
+                  />
+                  <input
+                    {...register("lastName", {
+                      required: "Bu alanin doldurulmasi zorunludur.",
+                    })}
+                    type="text"
+                    placeholder="Soyad"
+                    className="h-12 w-full rounded-xl bg-slate-200 p-4"
+                  />
+                  <input
+                    {...register("email", {
+                      required: "Bu alanin doldurulmasi zorunludur.",
+                    })}
+                    type="text"
+                    placeholder="E-mail adresiniz"
+                    className="h-12 w-full rounded-xl bg-slate-200 p-4"
+                  />
+                  <input
+                    {...register("password", {
+                      required: "Bu alanin doldurulmasi zorunludur.",
+                    })}
+                    type="password"
+                    placeholder="Şifreniz"
+                    className="h-12 w-full rounded-xl bg-slate-200 p-4"
+                  />
+
+                  <StyledButton size="large">Giriş Yap</StyledButton>
+
+                  <button>Şifremi Unuttum</button>
+                </form>
+                <p>
+                  Zaten bir hesabın var mı?{" "}
+                  <button
+                    className="font-semibold"
+                    onClick={() => setOpen(!isOpen)}
+                  >
+                    Giriş Yap
+                  </button>
+                </p>
+              </div>
+            )}
           </div>
-          <div className="rainbow-card flex h-[425px] w-3/4 justify-self-start p-2">
+          <div className="rainbow-card flex min-h-[450px] w-3/4 justify-self-start p-2">
             <div className="flex w-full flex-col items-center justify-center space-y-8 rounded-2xl bg-white p-8">
               <img src="/assets/iklogo.svg" className="h-auto w-60" />
               <span className="w-1/3 border-b-2 border-b-[#00b078]"></span>
@@ -140,9 +212,12 @@ const LoginPage = () => {
           </div>
           <div>© 2024 Tobeto Platform Clone Project</div>
           <div>
-            <ul className="flex justify-between space-x-4">
+            <ul className="login-footer flex justify-between space-x-4">
               <li>
-                <a href="https://www.facebook.com/tobetoplatform">
+                <a
+                  href="https://www.facebook.com/tobetoplatform"
+                  target="_blank"
+                >
                   <svg
                     width="24"
                     height="24"
@@ -162,7 +237,10 @@ const LoginPage = () => {
               </li>
 
               <li>
-                <a href="https://www.instagram.com/tobeto_official/">
+                <a
+                  href="https://www.instagram.com/tobeto_official/"
+                  target="_blank"
+                >
                   <svg
                     width="24"
                     height="24"
@@ -196,7 +274,7 @@ const LoginPage = () => {
               </li>
 
               <li>
-                <a href="https://twitter.com/tobeto_platform">
+                <a href="https://twitter.com/tobeto_platform" target="_blank">
                   <svg
                     width="24"
                     height="24"
@@ -216,7 +294,10 @@ const LoginPage = () => {
               </li>
 
               <li>
-                <a href="https://www.linkedin.com/company/tobeto/">
+                <a
+                  href="https://www.linkedin.com/company/tobeto/"
+                  target="_blank"
+                >
                   <svg
                     width="24"
                     height="24"
