@@ -1,21 +1,23 @@
 import axios from "axios";
 import { Skill } from "../models/skillModel";
 import { BASE_API_URL } from "../environment/environment";
+import { City } from "../models/cityModel";
+import { District } from "../models/districtModel";
 
-class SkillService {
-  static async getSkillData(): Promise<Skill | null> {
+class DistrictService {
+  static async getDistrictData(): Promise<District | null> {
     try {
       const response = await axios.get<any>(
         // "http://localhost:5045/api/Skills?PageIndex=0&PageSize=40"
-        BASE_API_URL + "AccountSkill?PageIndex=0&PageSize=10"
+        BASE_API_URL + "District?PageIndex=0&PageSize=100"
       );
-      const skillData = response.data?.items;
-      if (skillData) {
+      const districtData = response.data?.items;
+      if (districtData) {
         // const formattedData: Skill = {
-        //   name: skillData.name,
+        //   name: cityData.name,
         // };
-        console.log(skillData);
-        return skillData;
+        console.log(districtData);
+        return districtData;
       } else {
         return null;
       }
@@ -25,4 +27,4 @@ class SkillService {
   }
 }
 
-export default SkillService;
+export default DistrictService;

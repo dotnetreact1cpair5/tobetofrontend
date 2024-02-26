@@ -1,3 +1,7 @@
 export interface SocialMedia {
-  name: string;
+  id: number;
+  accountId: number;
+  socialMediaPlatformId: number;
+  socialMediaPlatformName: string;
+  link: string;
 }

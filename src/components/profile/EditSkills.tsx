@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+import SkillService from "../../services/SkillService";
 import GenericButton from "../helpers/GenericButton";
+import { Skill } from "../../models/skillModel";
 
 const EditSkills = () => {
   const transition = {
@@ -10,13 +13,24 @@ const EditSkills = () => {
     animate: { y: 0 },
     exit: { y: "-100%" },
   };
+  const [skills, setSkills] = useState<Skill | null>(null);
+  useEffect(() => {
+    const fetchSkills = async () => {
+      const data = await SkillService.getSkillData();
+      console.log(data);
+      setSkills(data);
+    };
+    fetchSkills();
+  }, []);
   return (
     <form className="form flex flex-col">
       <div className="input-container grid grid-cols-4 place-items-center gap-4 p-12">
         <div className="col-span-4">
           <label htmlFor="">Yetkinlik</label>
           <select className="rounded-lg">
-            <option value="">qwe</option>
+            {skills?.map((s) => {
+              return <option>{s.skillName}</option>;
+            })}
           </select>
         </div>
       </div>

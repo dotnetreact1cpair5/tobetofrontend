@@ -1,3 +1,6 @@
 export interface ForeignLanguage {
-  name: string;
+  id: number;
+  accountId: number;
+  foreignLanguageName: string;
+  foreignLanguageLevelName: string;
 }

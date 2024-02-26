@@ -1,8 +1,13 @@
 export interface Account {
-  firstName: string;
-  lastName: string;
-  birthDate: string;
-  phoneNumber: string;
-  email: string;
-  description:string;
+  firstName?: string;
+  lastName?: string;
+  nationalId?: string;
+  email?: string;
+  birthDate?: string;
+  phoneNumber?: string;
+  description?: string;
+  address?: string;
+  countryName?: string;
+  cityName?: string;
+  districtName?: string;
 }

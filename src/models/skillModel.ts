@@ -1,3 +1,5 @@
 export interface Skill {
-  name:string;
+  id: number;
+  accountId: number;
+  skillName: string;
 }

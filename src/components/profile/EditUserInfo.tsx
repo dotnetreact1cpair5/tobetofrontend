@@ -1,4 +1,11 @@
+import { useEffect, useState } from "react";
 import GenericButton from "../helpers/GenericButton";
+import AccountService from "../../services/AccountService";
+import { Account } from "../../models/accountModel";
+import CityService from "../../services/CityService";
+import { City } from "../../models/cityModel";
+import DistrictService from "../../services/DistrictService";
+import { District } from "../../models/districtModel";
 
 const EditUserInfo = () => {
   const transition = {
@@ -10,6 +17,21 @@ const EditUserInfo = () => {
     animate: { y: 0 },
     exit: { y: "-100%" },
   };
+  const [accountData, setAccountData] = useState<Account | null>(null);
+  const [cityData, setCityData] = useState<City | null>(null);
+  const [districtData, setDistrictData] = useState<District | null>(null);
+  useEffect(() => {
+    const fetchAccountData = async () => {
+      const data = await AccountService.getProfileData();
+      const cityData = await CityService.getCityData();
+      const districtData = await DistrictService.getDistrictData();
+
+      setAccountData(data);
+      setCityData(cityData);
+      setDistrictData(districtData);
+    };
+    fetchAccountData();
+  }, []);
   return (
     <form className="form flex flex-col">
       <div className="flex flex-col items-center justify-center">
@@ -30,37 +52,94 @@ const EditUserInfo = () => {
       </div>
       <div className="input-container grid grid-cols-4 place-items-center gap-4 p-12">
         <div className="col-span-2">
-          <label htmlFor="">Kurum Adı*</label>
-          <input type="text" />
+          <label htmlFor="">Adınız*</label>
+          <input
+            type="text"
+            placeholder={accountData?.firstName}
+            className="placeholder-slate-400"
+          />
         </div>
         <div className="col-span-2">
-          <label htmlFor="">Pozisyon*</label>
-          <input type="text" />
+          <label htmlFor="">Soyadınız*</label>
+          <input
+            type="text"
+            placeholder={accountData?.lastName}
+            className="placeholder-slate-400"
+          />
         </div>
         <div className="col-span-2">
-          <label htmlFor="">Sektör*</label>
-          <input type="text" />
+          <label htmlFor="">Telefon Numaranız*</label>
+          <input
+            type="text"
+            placeholder={accountData?.phoneNumber}
+            className="placeholder-slate-400"
+          />
         </div>
         <div className="col-span-2">
-          <label htmlFor="">Şehir*</label>
+          <label htmlFor="">Doğum Tarihiniz*</label>
+          <input
+            type="text"
+            value={new Date(accountData?.birthDate).toLocaleDateString()}
+            className="placeholder-slate-400"
+          />
+        </div>
+        <div className="col-span-2">
+          <label htmlFor="">TC Kimlik No*</label>
+          <input
+            type="text"
+            placeholder={accountData?.nationalId}
+            className="placeholder-slate-400"
+          />
+        </div>
+        <div className="col-span-2">
+          <label htmlFor="">E-posta</label>
+          <input
+            type="text"
+            placeholder={accountData?.email}
+            className="placeholder-slate-400"
+          />
+        </div>
+
+        <div className="col-span-4">
+          <label htmlFor="">Ülke*</label>
+
+          <input
+            type="text"
+            className="placeholder-slate-400"
+            placeholder={accountData?.countryName}
+          />
+        </div>
+        <div className="col-span-2">
+          <label htmlFor="">İl*</label>
           <select
             name="Cities"
             id=""
             className="rounded-xl transition duration-300 focus:border-0 focus:ring-4 focus:ring-purple-400"
           >
-            <option value="">a</option>
+            {cityData?.map((c) => {
+              return <option>{c.name}</option>;
+            })}
           </select>
         </div>
         <div className="col-span-2">
-          <label htmlFor="">İş Başlangıcı*</label>
-          <input type="date" />
+          <label htmlFor="">İlçe*</label>
+          <select
+            name="Districts"
+            id=""
+            className="rounded-xl transition duration-300 focus:border-0 focus:ring-4 focus:ring-purple-400"
+          >
+            {districtData?.map((d) => {
+              return <option>{d.name}</option>;
+            })}
+          </select>
         </div>
-        <div className="col-span-2">
-          <label htmlFor="">İş Bitiş*</label>
-          <input type="date" placeholder="gg/aa/yyyy" />
+
+        <div className="col-span-4">
+          <label htmlFor="">Mahalle / Sokak</label>
+          <textarea className="max-h-[200px] rounded-lg" />
         </div>
         <div className="col-span-4">
-          <label htmlFor="">İş Açıklaması</label>
+          <label htmlFor="">Hakkımda</label>
           <textarea className="max-h-[200px] rounded-lg" />
         </div>
       </div>

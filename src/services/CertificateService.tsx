@@ -7,18 +7,11 @@ class CertificateService {
     try {
       const response = await axios.get<any>(
         // "http://localhost:5045/api/AccountCertificates?PageIndex=0&PageSize=10"
-        BASE_API_URL + "AccountCertificates?PageIndex=0&PageSize=10"
+        BASE_API_URL + "AccountCertificate?PageIndex=0&PageSize=10"
       );
-      const CertificateData = response.data?.items[0];
-      if (CertificateData) {
-        const formattedData: Certificate = {
-          accountId: CertificateData.accountId,
-          name: CertificateData.name,
-        };
-        return formattedData;
-      } else {
-        return null;
-      }
+      const CertificateData = response.data?.items;
+
+      return CertificateData;
     } catch (error) {
       throw new Error("Certificate service error: ");
     }

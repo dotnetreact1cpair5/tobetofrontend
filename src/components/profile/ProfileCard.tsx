@@ -12,6 +12,12 @@ interface DataItem {
 
 interface ProfileCardProps {
   data?: any;
+  skillData?: any;
+  accountData?: any;
+  languageData?: any;
+  experienceData?: any;
+  certificateData?: any;
+  socialMediaData?: any;
   title: string;
   content?: string;
   badges?: string[];
@@ -19,7 +25,6 @@ interface ProfileCardProps {
   chart?: boolean;
   chartData?: DataItem[];
 }
-
 
 const sourceData: DataItem[] = [
   { label: "Yeni dünyaya hazırlanıyorum", value: 65 },
@@ -34,6 +39,13 @@ const sourceData: DataItem[] = [
 
 const ProfileCard: React.FC<ProfileCardProps> = ({
   data,
+  accountData,
+  languageData,
+  experienceData,
+  certificateData,
+  socialMediaData,
+
+  skillData,
   title,
   content,
   badges,
@@ -78,8 +90,62 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     <div className="flex flex-col items-center rounded-2xl p-4 shadow-2xl">
       <h3 className="text-lg font-bold">{title}</h3>
       <hr className="h-1 w-full border-t-2" />
-      {data && <span>{(data as Account).description}</span>}
-      {data && <span>{(data).name}</span>}
+      {accountData && <span>{accountData.description}</span>}
+      {languageData &&
+        languageData.map((lang) => (
+          <div>
+            <p>{lang.foreignLanguageLevelName}</p>
+            <p>{lang.foreignLanguageName}</p>
+          </div>
+        ))}
+      {skillData &&
+        skillData.map((skill) => (
+          <div>
+            <p>{skill.skillName}</p>
+          </div>
+        ))}
+      {certificateData &&
+        certificateData.map((cert) => (
+          <div>
+            <p>{cert.name}</p>
+          </div>
+        ))}
+      {socialMediaData &&
+        socialMediaData.map((social) => (
+          <div>
+            <p>{social.link}</p>
+          </div>
+        ))}
+      {/* <div className="flex flex-col">
+        {accountData &&
+          accountData.map((d) => (
+            <div>
+              <p> {d.cityName}</p>
+              <p> {d.companyName}</p>
+              <p> {d.position}</p>
+              <p> {d.sector}</p>
+              <p> {d.jobDescription}</p>
+              <p> {d.startDate.toLocaleString()}</p>
+              <p> {d.endDate.toLocaleString()}</p>
+            </div>
+          ))}
+      </div> */}
+
+      <div className="flex flex-col">
+        {experienceData &&
+          experienceData.map((d) => (
+            <div>
+              <p> {d.cityName}</p>
+              <p> {d.companyName}</p>
+              <p> {d.position}</p>
+              <p> {d.sector}</p>
+              <p> {d.jobDescription}</p>
+              <p> {d.startDate.toLocaleString()}</p>
+              <p> {d.endDate.toLocaleString()}</p>
+            </div>
+          ))}
+      </div>
+
       {badges &&
         badges.map((badge, index) => (
           <div className="badge" key={index}>
@@ -93,7 +159,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
           values={[{ date: "2022-01-01", count: 3 }]}
         />
       )}
-      {chart && <canvas id="radarChart" />}
+
+      {chart && (
+        <canvas
+          id="radarChart"
+          style={{ maxWidth: "400px", maxHeight: "400px" }}
+        />
+      )}
     </div>
   );
 };

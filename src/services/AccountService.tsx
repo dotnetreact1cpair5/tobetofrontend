@@ -1,28 +1,20 @@
 import axios from "axios";
 import { Account } from "../models/accountModel";
+import { BASE_API_URL } from "../environment/environment";
 
 class AccountService {
   static async getProfileData(): Promise<Account | null> {
     try {
       const response = await axios.get<any>(
-        "http://localhost:5045/api/Account?PageIndex=0&PageSize=5"
+        // "http://localhost:5045/api/Account?PageIndex=0&PageSize=5"
+        BASE_API_URL + "Account?PageIndex=0&PageSize=5"
       );
       const userData = response.data?.items[0];
-      if (userData) {
-        const formattedData: Account = {
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          birthDate: userData.birthDate,
-          phoneNumber: userData.phoneNumber,
-          email: userData.email,
-          description:userData.description
-        };
-        return formattedData;
-      } else {
-        return null; 
-      }
+      console.log(userData);
+
+      return userData;
     } catch (error) {
-      throw new Error("Account service error: "); 
+      throw new Error("Account service error: ");
     }
   }
 }

@@ -6,11 +6,13 @@ import ForeignLanguageService from "../services/ForeignLanguageService";
 import SocialMediaService from "../services/SocialMediaService";
 import SkillService from "../services/SkillService";
 import CertificateService from "../services/CertificateService";
+import ExperienceService from "../services/ExperienceService";
 import { Account } from "../models/accountModel";
 import { ForeignLanguage } from "../models/foreignLanguageModel";
 import { SocialMedia } from "../models/socialMediaModel";
 import { Skill } from "../models/skillModel";
 import { Certificate } from "../models/certificateModel";
+import { Experience } from "../models/experienceModel";
 
 const ProfilePage = () => {
   const [accountData, setAccountData] = useState<Account | null>(null);
@@ -24,6 +26,8 @@ const ProfilePage = () => {
   const [certificateData, setCertificateData] = useState<Certificate | null>(
     null
   );
+  const [experienceData, setExperienceData] = useState<Experience | null>(null);
+
   const [loading, setLoading] = useState<boolean>(true);
   const [fetchError, setFetchError] = useState<string | null>(null);
 
@@ -35,7 +39,9 @@ const ProfilePage = () => {
         const socialMedia = await SocialMediaService.getSocialMediaData();
         const skill = await SkillService.getSkillData();
         const certificate = await CertificateService.getCertificateData();
+        const experience = await ExperienceService.getExperienceData();
 
+        setExperienceData(await ExperienceService.getExperienceData());
         setAccountData(account);
         setLanguageData(language);
         setSocialMediaData(socialMedia);
@@ -49,6 +55,7 @@ const ProfilePage = () => {
     };
 
     fetchData();
+    console.log(experienceData);
   }, []);
 
   return (
@@ -57,15 +64,21 @@ const ProfilePage = () => {
         {loading && <div>Loading...</div>}
         {fetchError && <div>Error: {fetchError}</div>}
         <ProfileDataCard data={accountData} />
-        <ProfileCard title="Hakkımda" data={accountData} />
-        <ProfileCard title="Yetkinliklerim" data={skillData} />
-        <ProfileCard title="Yabancı Dillerim" data={languageData} />
-        <ProfileCard title="Sertifikalarım" data={certificateData} />
-        <ProfileCard title="Medya Hesaplarım" data={socialMediaData} />
+        <ProfileCard title="Hakkımda" accountData={accountData} />
+        <ProfileCard title="Yetkinliklerim" skillData={skillData} />
+        <ProfileCard title="Yabancı Dillerim" languageData={languageData} />
+        <ProfileCard title="Sertifikalarım" certificateData={certificateData} />
+        <ProfileCard
+          title="Medya Hesaplarım"
+          socialMediaData={socialMediaData}
+        />
       </div>
       <div className="col-span-2 w-full space-y-8">
         <ProfileCard title="Tobeto İşte Başarı Modelim" chart={true} />
-        <ProfileCard title="Tobeto Seviye Testlerim" data={languageData} />
+        <ProfileCard
+          title="Tobeto Seviye Testlerim"
+          languageData={languageData}
+        />
         <ProfileCard
           title="Yetkinlik Rozetlerim"
           data={languageData}
@@ -74,7 +87,7 @@ const ProfilePage = () => {
         <ProfileCard title="Aktivite Haritam" activity={true} />
         <ProfileCard
           title="Eğitim Hayatım ve Deneyimlerim"
-          data={languageData}
+          experienceData={experienceData}
         />
       </div>
     </main>

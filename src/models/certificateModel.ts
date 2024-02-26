@@ -1,5 +1,5 @@
 export interface Certificate {
-    accountId:number;
-    name:string;
-  }
-  
+  id: number;
+  accountId: number;
+  name: string;
+}

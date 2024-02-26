@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import GenericButton from "../helpers/GenericButton";
+import { SocialMedia } from "../../models/socialMediaModel";
+import SocialMediaService from "../../services/SocialMediaService";
 
 const EditSocialMedia = () => {
   const transition = {
@@ -10,18 +13,40 @@ const EditSocialMedia = () => {
     animate: { y: 0 },
     exit: { y: "-100%" },
   };
+  const [selectedMedia, setSelectedMedia] = useState("");
+  const [inputValue, setInputValue] = useState("");
+  const [socialMedia, setSocialMedia] = useState<SocialMedia[] | null>(null);
+  useEffect(() => {
+    const fetchSocialMedia = async () => {
+      const data = await SocialMediaService.getSocialMediaData();
+      console.log(data);
+      setSocialMedia(data);
+    };
+    fetchSocialMedia();
+  }, []);
+
+  const handleSubmit = (e, id) => {
+    e.preventDefault();
+    SocialMediaService.postSocialMedia(id);
+  };
+
   return (
-    <form className="form flex flex-col">
+    <form className="form flex flex-col" onSubmit={handleSubmit}>
       <div className="input-container grid grid-cols-4 place-items-center gap-4 p-12">
         <div className="col-span-2">
           <select
             name="Cities"
             id=""
             className="rounded-xl transition duration-300 focus:border-0 focus:ring-4 focus:ring-purple-400"
+            value={selectedMedia}
+            onChange={(e) => setSelectedMedia(e.target.value)}
           >
             <option selected value="">
-              a
+              Seçiniz
             </option>
+            {socialMedia?.map((s) => {
+              return <option>{s.socialMediaPlatformName}</option>;
+            })}
           </select>
         </div>
         <div className="col-span-2">

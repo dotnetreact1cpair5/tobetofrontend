@@ -1,25 +1,30 @@
-// export const fetchExperiences = async () => {
-//   try {
-//     const response = await fetch("https://jsonplaceholder.typicode.com/users/");
+import axios from "axios";
 
-//     if (!response.ok) {
-//       throw new Error("Veri çekme hatası!");
-//     }
+import { BASE_API_URL } from "../environment/environment";
+import { Experience } from "../models/experienceModel";
 
-//     const { items } = await response.json();
+class ExperienceService {
+  static async getExperienceData(): Promise<Experience | null> {
+    try {
+      const response = await axios.get<any>(
+        // "http://localhost:5045/api/SocialMediaPlatforms?PageIndex=0&PageSize=10"
+        BASE_API_URL + "AccountExperience?PageIndex=0&PageSize=10"
+      );
+      console.log(response);
+      const experienceData = response.data.items;
+      console.log(experienceData);
+      if (experienceData) {
+        // const formattedData: Experience = {
+        //   name: experienceData.companyName,
+        // };
+        return experienceData;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw new Error("Experience service error: ");
+    }
+  }
+}
 
-//     if (
-//       !responseData ||
-//       !responseData.items ||
-//       !Array.isArray(responseData.items)
-//     ) {
-//       console.error("Alınan veri beklenen formatta değil:", responseData);
-//       throw new Error("Alınan veri beklenen formatta değil");
-//     }
-
-//     return items;
-//   } catch (error) {
-//     console.error("Veri alınırken hata oluştu!:", error);
-//     throw error;
-//   }
-// };
+export default ExperienceService;
