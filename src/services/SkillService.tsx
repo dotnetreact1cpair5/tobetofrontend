@@ -3,7 +3,7 @@ import { Skill } from "../models/skillModel";
 import { BASE_API_URL } from "../environment/environment";
 
 class SkillService {
-  static async getSkillData(): Promise<Skill | null> {
+  static async getSkillData(): Promise<Skill[] | null> {
     try {
       const response = await axios.get<any>(
         // "http://localhost:5045/api/Skills?PageIndex=0&PageSize=40"

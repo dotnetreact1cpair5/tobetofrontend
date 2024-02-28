@@ -13,16 +13,17 @@ import { SocialMedia } from "../models/socialMediaModel";
 import { Skill } from "../models/skillModel";
 import { Certificate } from "../models/certificateModel";
 import { Experience } from "../models/experienceModel";
+import { AnimatePresence, motion } from "framer-motion";
 
 const ProfilePage = () => {
   const [accountData, setAccountData] = useState<Account | null>(null);
-  const [languageData, setLanguageData] = useState<ForeignLanguage | null>(
+  const [languageData, setLanguageData] = useState<ForeignLanguage[] | null>(
     null
   );
-  const [socialMediaData, setSocialMediaData] = useState<SocialMedia | null>(
+  const [socialMediaData, setSocialMediaData] = useState<SocialMedia[] | null>(
     null
   );
-  const [skillData, setSkillData] = useState<Skill | null>(null);
+  const [skillData, setSkillData] = useState<Skill[] | null>(null);
   const [certificateData, setCertificateData] = useState<Certificate | null>(
     null
   );
@@ -57,40 +58,56 @@ const ProfilePage = () => {
     fetchData();
     console.log(experienceData);
   }, []);
+  const transition = {
+    duration: 1.5,
+  };
+
+  const slideTransition = {
+    initial: { x: "100%" },
+    animate: { x: 0 },
+    exit: { x: "-100%" },
+  };
 
   return (
-    <main className="container mx-auto grid max-w-6xl grid-cols-3 space-x-8 p-4">
-      <div className="col-span-1 w-full space-y-8">
-        {loading && <div>Loading...</div>}
-        {fetchError && <div>Error: {fetchError}</div>}
-        <ProfileDataCard data={accountData} />
-        <ProfileCard title="Hakkımda" accountData={accountData} />
-        <ProfileCard title="Yetkinliklerim" skillData={skillData} />
-        <ProfileCard title="Yabancı Dillerim" languageData={languageData} />
-        <ProfileCard title="Sertifikalarım" certificateData={certificateData} />
-        <ProfileCard
-          title="Medya Hesaplarım"
-          socialMediaData={socialMediaData}
-        />
-      </div>
-      <div className="col-span-2 w-full space-y-8">
-        <ProfileCard title="Tobeto İşte Başarı Modelim" chart={true} />
-        <ProfileCard
-          title="Tobeto Seviye Testlerim"
-          languageData={languageData}
-        />
-        <ProfileCard
-          title="Yetkinlik Rozetlerim"
-          data={languageData}
-          badges={["a", "b", "c"]}
-        />
-        <ProfileCard title="Aktivite Haritam" activity={true} />
-        <ProfileCard
-          title="Eğitim Hayatım ve Deneyimlerim"
-          experienceData={experienceData}
-        />
-      </div>
-    </main>
+    <motion.div
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={slideTransition}
+      transition={transition}
+    >
+      <main className="container mx-auto grid max-w-6xl grid-cols-3 space-x-8 p-4">
+        <div className="col-span-1 w-full space-y-8">
+          {loading && <div>Loading...</div>}
+          {fetchError && <div>Error: {fetchError}</div>}
+          <ProfileDataCard data={accountData} />
+          <ProfileCard title="Hakkımda" accountData={accountData} />
+          <ProfileCard title="Yetkinliklerim" skillData={skillData} />
+          <ProfileCard title="Yabancı Dillerim" languageData={languageData} />
+          <ProfileCard
+            title="Sertifikalarım"
+            certificateData={certificateData}
+          />
+          <ProfileCard
+            title="Medya Hesaplarım"
+            socialMediaData={socialMediaData}
+          />
+        </div>
+        <div className="col-span-2 w-full space-y-8">
+          <ProfileCard title="Tobeto İşte Başarı Modelim" chart={true} />
+          <ProfileCard
+            title="Tobeto Seviye Testlerim"
+            languageData={languageData}
+          />
+          <ProfileCard title="Yetkinlik Rozetlerim" badges={["a", "b", "c"]} />
+          <ProfileCard title="Aktivite Haritam" activity={true} />
+          <ProfileCard
+            title="Eğitim Hayatım ve Deneyimlerim"
+            experienceData={experienceData}
+          />
+        </div>
+      </main>
+    </motion.div>
   );
 };
 

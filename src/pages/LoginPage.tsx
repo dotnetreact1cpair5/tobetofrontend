@@ -153,6 +153,10 @@ const LoginPage = () => {
                   <input
                     {...loginRegister("password", {
                       required: "Bu alanin doldurulmasi zorunludur.",
+                      minLength: {
+                        value: 5,
+                        message: "Password must be at least 5 characters long",
+                      },
                     })}
                     type="password"
                     placeholder="Şifreniz"

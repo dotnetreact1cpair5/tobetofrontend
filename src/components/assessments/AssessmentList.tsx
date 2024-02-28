@@ -13,7 +13,7 @@ const AssessmentList = ({ assessments, toggleModal }: any) => {
       {assessments.map((assessment: any) => {
         return (
           <AssessmentCard toggleModal={toggleModal} assessment={assessment}>
-            {assessment.username}
+            {assessment}
           </AssessmentCard>
         );
       })}

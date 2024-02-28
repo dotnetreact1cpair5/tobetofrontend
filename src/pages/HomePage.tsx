@@ -30,12 +30,21 @@ const HomePage = () => {
   //   const id = authService.getUserInfo();
   //   console.log(id);
   // }, []);
+  const transition = {
+    duration: 1.5,
+  };
 
+  const slideTransition = {
+    initial: { y: "100%" },
+    animate: { y: 0 },
+  };
   return (
     <motion.div
-      transition={{ duration: 2 }}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={slideTransition}
+      transition={transition}
     >
       <App />
     </motion.div>

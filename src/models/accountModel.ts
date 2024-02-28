@@ -3,7 +3,7 @@ export interface Account {
   lastName?: string;
   nationalId?: string;
   email?: string;
-  birthDate?: string;
+  birthDate?: any;
   phoneNumber?: string;
   description?: string;
   address?: string;

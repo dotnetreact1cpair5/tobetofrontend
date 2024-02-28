@@ -10,7 +10,7 @@ function Welcome() {
           <span className="text-4xl font-bold text-[#9933ff]">TOBETO</span>
           <span className="text-3xl font-normal">'ya hoş geldin</span>
         </h3>
-        <h4 className="mb-5 mt-2 text-3xl underline decoration-violet-400 decoration-wavy decoration-4 underline-offset-8">
+        <h4 className="mb-5 mt-2 text-3xl">
           {user?.username}
         </h4>
         <p className="mt-[2em] text-2xl">

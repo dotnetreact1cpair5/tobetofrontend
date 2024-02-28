@@ -2,21 +2,22 @@ import axios from "axios";
 import { Skill } from "../models/skillModel";
 import { BASE_API_URL } from "../environment/environment";
 import { City } from "../models/cityModel";
+import { University } from "../models/universityModel";
 
-class CityService {
-  static async getCityData(): Promise<City[] | null> {
+class UniversityService {
+  static async getUniData(): Promise<University[] | null> {
     try {
       const response = await axios.get<any>(
         // "http://localhost:5045/api/Skills?PageIndex=0&PageSize=40"
-        BASE_API_URL + "City?PageIndex=0&PageSize=100"
+        BASE_API_URL + "Universities?PageIndex=0&PageSize=200"
       );
-      const cityData = response.data?.items;
-      if (cityData) {
+      const uniData = response.data?.items;
+      if (uniData) {
         // const formattedData: Skill = {
         //   name: cityData.name,
         // };
-        console.log(cityData);
-        return cityData;
+        console.log(uniData);
+        return uniData;
       } else {
         return null;
       }
@@ -26,4 +27,4 @@ class CityService {
   }
 }
 
-export default CityService;
+export default UniversityService;

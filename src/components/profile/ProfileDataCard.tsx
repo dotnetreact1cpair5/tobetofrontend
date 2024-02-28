@@ -8,9 +8,9 @@ const ProfileDataCard: React.FC<ProfileDataCardProps> = ({ data }) => {
   if (!data) {
     return <div>No data available</div>;
   }
-  const formattedBirthDate = new Date(data.birthDate).toLocaleDateString(
-    "tr-TR"
-  );
+  // const birthDate = data?.birthDate;
+  // const formattedBirthDate = birthDate?.toLocaleDateString("tr-TR");
+
   return (
     <div className="flex flex-col justify-around space-y-8 rounded-2xl p-4 shadow-2xl">
       <div className="">
@@ -34,7 +34,9 @@ const ProfileDataCard: React.FC<ProfileDataCardProps> = ({ data }) => {
           <img src="/assets/cv-date.svg" alt="Date Icon" />
           <div className="flex flex-col">
             <h5 className="text-xs">Doğum Tarihi</h5>
-            <span className="font-semibold">{formattedBirthDate}</span>
+            <span className="font-semibold">
+              {new Date(data?.birthDate).toLocaleDateString()}
+            </span>
           </div>
         </div>
         <div className="flex space-x-4">

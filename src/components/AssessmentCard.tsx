@@ -11,15 +11,13 @@ const AssessmentCard = ({ children, toggleModal, assessment }: any) => {
   return (
     <div className="flex w-[514px] items-center justify-between rounded-full bg-gradient-to-r from-[#bda6fe] to-[#1d0b8c] px-4 py-2">
       <span>
-        <img
-          src="/assets/assessmenticon.png"
-          className="h-12 w-12"
-          onClick={modalHandler}
-        />
+        <img src="/assets/assessmenticon.png" className="h-12 w-12" />
       </span>
       {children}
-      abc
-      <GenericButton className="bg-green-500 text-4xl">Başla</GenericButton>
+
+      <GenericButton className="bg-white px-8 text-lg text-black hover:scale-110" onClick={modalHandler}>
+        Başla
+      </GenericButton>
       {showModal && (
         <Modal assessment={assessment} setShowModal={setShowModal} />
       )}

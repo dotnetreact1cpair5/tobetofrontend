@@ -6,7 +6,9 @@ function ActionButtons() {
     <section>
       <div className="container mx-auto my-10 grid max-w-6xl grid-cols-3 place-items-center gap-2 text-center">
         <div className="card flex w-60 flex-col gap-4 bg-gradient-to-bl from-[#1d0b8c] to-[#bda6fe] p-5 text-white">
-          <h1>Profilini oluştur</h1>
+          <h1 className="text-center text-2xl">
+            Profilini <br /> oluştur
+          </h1>
           <button
             className="rounded-full bg-violet-600 px-4 py-2"
             onClick={() => navigate("/profilim")}

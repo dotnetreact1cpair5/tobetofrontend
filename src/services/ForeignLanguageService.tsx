@@ -2,7 +2,7 @@ import axios from "axios";
 import { ForeignLanguage } from "../models/foreignLanguageModel";
 import { BASE_API_URL } from "../environment/environment";
 class ForeignLanguageService {
-  static async getForeignLanguageData(): Promise<ForeignLanguage | null> {
+  static async getForeignLanguageData(): Promise<ForeignLanguage[] | null> {
     try {
       const response = await axios.get<any>(
         // "http://localhost:5045/api/ForeignLanguage?PageIndex=0&PageSize=20"

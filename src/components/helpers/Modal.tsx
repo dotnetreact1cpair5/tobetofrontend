@@ -1,3 +1,5 @@
+import GenericButton from "./GenericButton";
+
 type ModalProps = {
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
   assessment: any;
@@ -5,11 +7,11 @@ type ModalProps = {
 
 const Modal = ({ assessment, setShowModal }: ModalProps) => {
   return (
-    <div className="fixed left-0 top-0 flex h-full w-full bg-black bg-opacity-60">
-      <div className="relative mx-auto flex h-96 max-w-6xl flex-col items-center justify-center gap-20 place-self-center bg-white p-4 text-center text-black hover:opacity-100">
-        <h2 className="text-4xl font-bold">{assessment.username}</h2>
+    <div className="fixed left-0 top-0 flex min-h-full w-full items-center justify-center bg-black bg-opacity-60">
+      <div className="relative mx-auto flex h-96 max-w-6xl flex-col items-center justify-center space-y-12 place-self-center rounded-lg bg-white p-4 text-center text-black hover:opacity-100">
+        <h2 className="text-4xl font-bold">{assessment}</h2>
         <button
-          className="absolute right-4 top-4 cursor-pointer"
+          className="absolute -top-8 right-4 cursor-pointer"
           onClick={() => setShowModal(false)}
         >
           <svg
@@ -36,6 +38,9 @@ const Modal = ({ assessment, setShowModal }: ModalProps) => {
           <span>Sınav Süresi : 30 Dakika</span>
           <span>Soru Sayısı : 25</span>
           <span>Soru Tipi : Çoktan Seçmeli</span>
+          <GenericButton className="mt-4 bg-[#93f] text-white">
+            Başla
+          </GenericButton>
         </div>
       </div>
     </div>

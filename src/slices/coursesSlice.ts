@@ -65,7 +65,8 @@ const initialState: CoursesState = {
 export const fetchAllCourses = createAsyncThunk(
   "courses/fetchAllCourses",
   async (userId: any) => {
-    return await courseService.getUserCourses(userId);
+    // return await courseService.getUserCourses(userId);
+    return await courseService.getUserCourses(1);
   }
 );
 // export const fetchCourseById = createAsyncThunk(

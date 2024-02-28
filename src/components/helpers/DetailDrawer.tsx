@@ -24,7 +24,7 @@ const DetailDrawer = ({ isOpen, setOpen, course }: DrawerProps) => {
         <p>{course?.organizationName}</p>
         <p>{course?.sessionRecord}</p>
         <p>{course?.organizationName}</p>
-        <p>{course?.endDate.toLocaleString()}</p>
+        <p>{course?.endDate?.toLocaleString()}</p>
         <p>Some contents...</p>
       </div>
     </Drawer>

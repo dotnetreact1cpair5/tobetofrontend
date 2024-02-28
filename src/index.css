@@ -84,3 +84,19 @@ li > a.active {
 .form > .input-container > div > input {
   @apply appearance-none rounded-xl transition duration-300 focus:border-0 focus:ring-4 focus:ring-purple-400;
 }
+
+.react-calendar-heatmap .color-empty {
+  fill: green; /* Change this color to your desired color for empty */
+}
+
+.react-calendar-heatmap .color-low {
+  fill: lightcoral; /* Change this color to your desired color for low */
+}
+
+.react-calendar-heatmap .color-medium {
+  fill: orange; /* Change this color to your desired color for medium */
+}
+
+.react-calendar-heatmap .color-high {
+  fill: violet; /* Change this color to your desired color for high */
+}

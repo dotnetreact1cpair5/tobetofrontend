@@ -5,7 +5,7 @@ import { City } from "../models/cityModel";
 import { District } from "../models/districtModel";
 
 class DistrictService {
-  static async getDistrictData(): Promise<District | null> {
+  static async getDistrictData(): Promise<District[] | null> {
     try {
       const response = await axios.get<any>(
         // "http://localhost:5045/api/Skills?PageIndex=0&PageSize=40"

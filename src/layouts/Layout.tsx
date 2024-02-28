@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 function Layout() {
   return (
     <main className="flex min-h-screen flex-col">
-      <div>
+      <div className="">
         <Navbar />
 
         <Outlet />

@@ -36,9 +36,9 @@ function Navbar() {
             <li>
               <NavLink to="/degerlendirmeler">Değerlendirmeler</NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink to="/katalog">Katalog</NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink to="/takvim">Takvim</NavLink>
             </li>

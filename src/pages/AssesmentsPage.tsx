@@ -5,19 +5,25 @@ import GenericButton from "../components/helpers/GenericButton";
 import Modal from "../components/helpers/Modal";
 import { AnimatePresence, motion } from "framer-motion";
 function AssessmentsPage() {
-  const [assessments, setAssessments] = useState([]);
+  const [assessments, setAssessments] = useState([
+    "Front End",
+    "Back End",
+    "Full Stack",
+    "Microsoft SQL Server",
+    "Masaüstü Programlama",
+  ]);
 
-  useEffect(() => {
-    const fetchAssessments = async () => {
-      const response = await fetch("https://fakestoreapi.com/users?limit=5");
+  // useEffect(() => {
+  //   const fetchAssessments = async () => {
+  //     const response = await fetch("https://fakestoreapi.com/users?limit=5");
 
-      const data = await response.json();
-      // console.log(data);
-      // console.log(data[0].username);
-      setAssessments(data);
-    };
-    fetchAssessments();
-  }, []);
+  //     const data = await response.json();
+  //     // console.log(data);
+  //     // console.log(data[0].username);
+  //     setAssessments(data);
+  //   };
+  //   fetchAssessments();
+  // }, []);
   const transition = {
     duration: 1.5,
   };
@@ -50,7 +56,9 @@ function AssessmentsPage() {
               80 soru ile yetkinliklerini ölç, önerilen eğitimleri tamamla,
               rozetini kazan.
             </p>
-            <GenericButton>Raporu Görüntüle</GenericButton>
+            <GenericButton className="underline">
+              Raporu Görüntüle
+            </GenericButton>
           </div>
           {/* left-right card area */}
           <div className="doublecard grid grid-cols-2">

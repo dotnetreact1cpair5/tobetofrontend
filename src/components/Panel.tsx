@@ -13,7 +13,7 @@ function Panel() {
   const handleCourses = async () => {
     setActiveTabIndex(2);
     const response = await fetch(
-      "http://localhost:49805/api/AccountCourse?PageIndex=0&PageSize=4"
+      "http://platformtobeto.nl/api/AccountCourse/getbyuserid?userId=2&PageIndex=0&PageSize=10"
     );
 
     const { items } = await response.json();

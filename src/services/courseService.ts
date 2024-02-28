@@ -36,14 +36,15 @@ class CourseService extends BaseService<
     super();
     this.apiUrl = BASE_API_URL + "AccountCourse";
   }
-  async getAllCourses(userId: any) {
+  async getAllCourses() {
     const response = await axiosInstance.get<GetAllCoursesResponse>(
       this.apiUrl
     );
 
     console.log(response.data.items);
-    console.log("userId:", userId);
-    const userCourses = response.data?.items.filter((c) => c.userId === userId);
+    // console.log("userId:", userId);
+    // const userCourses = response.data?.items.filter((c) => c.userId === userId);
+    const userCourses = response.data.items;
     console.log(userCourses);
     return userCourses;
   }

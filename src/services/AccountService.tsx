@@ -9,7 +9,7 @@ class AccountService {
         // "http://localhost:5045/api/Account?PageIndex=0&PageSize=5"
         BASE_API_URL + "Account?PageIndex=0&PageSize=5"
       );
-      const userData = response.data?.items[0];
+      const userData = await response.data?.items?.[0];
       console.log(userData);
 
       return userData;
