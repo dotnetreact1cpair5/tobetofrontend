@@ -40,7 +40,10 @@ const EditSocialMedia = () => {
         variants={slideTransition}
         transition={transition}
       >
-        <form className="form flex flex-col">
+        <form
+          className="form flex flex-col"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <div className="input-container grid grid-cols-4 place-items-center gap-4 p-12">
             <div className="col-span-2">
               <select

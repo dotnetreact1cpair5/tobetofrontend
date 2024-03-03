@@ -59,7 +59,7 @@ const LoginPage = () => {
         dispatch(userActions.getUser());
 
         setTimeout(() => notify(), 500);
-        setTimeout(() => navigate("/"), 3000);
+        setTimeout(() => navigate("/"), 2000);
       }
     });
   };

@@ -42,7 +42,10 @@ const EditUserInfo = () => {
         variants={slideTransition}
         transition={transition}
       >
-        <form className="form flex flex-col">
+        <form
+          className="form flex flex-col"
+          onSubmit={(e) => e.preventDefault()}
+        >
           <div className="flex flex-col items-center justify-center">
             <img
               src="/assets/pfp.png"
